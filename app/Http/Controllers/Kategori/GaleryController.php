@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Kategori;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class InfoGrapikController extends Controller
+class GaleryController extends Controller
 {
     /**
      * Display a listing of the resource.

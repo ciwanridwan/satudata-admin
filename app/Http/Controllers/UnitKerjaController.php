@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\UnitKerja;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
-class GaleryController extends Controller
+class UnitKerjaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class GaleryController extends Controller
      */
     public function index()
     {
-        //
+        $unitKerja = UnitKerja::all();
+        return view('pages.unit-kerja.index')->with('unitKerja', $unitKerja);
     }
 
     /**
@@ -23,7 +26,7 @@ class GaleryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.unit-kerja.create');
     }
 
     /**
@@ -34,7 +37,16 @@ class GaleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, 
+        [
+            'nama' => 'required|max:255'
+        ]);
+        $addUnitKerja = new UnitKerja();
+        $addUnitKerja->nama = $request->input('nama');
+        $addUnitKerja->save();
+
+        Session::put('message', 'Data Berhasil Ditambah');
+        return redirect(route('index-UnitKerja'));
     }
 
     /**
@@ -54,9 +66,12 @@ class GaleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nama)
     {
-        //
+        $edit = UnitKerja::where('nama', $nama)->get();
+        foreach ($edit as $key) {
+            return view('pages.unit-kerja.edit')->with('key', $key);
+        }
     }
 
     /**
@@ -68,7 +83,12 @@ class GaleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = UnitKerja::find($id);
+        $update->nama = $request->input('nama');
+        $update->update();
+
+        Session::put('message', 'Data Berhasil Diperbaharui');
+        return redirect(route('index-UnitKerja'));
     }
 
     /**
@@ -79,6 +99,10 @@ class GaleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = UnitKerja::find($id);
+        $delete->delete();
+
+        Session::put('message', 'Data Berhasil Dihapus');
+        return redirect(route('index-UnitKerja'));
     }
 }

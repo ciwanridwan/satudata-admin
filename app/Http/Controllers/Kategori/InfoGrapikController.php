@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Kategori;
 
 use App\Http\Controllers\Controller;
+use App\KategoriInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class InfoGrapikController extends Controller
 {
@@ -14,7 +16,8 @@ class InfoGrapikController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = KategoriInfo::paginate(10);
+        return view('pages.kategori.infograpik.index')->with('kategori', $kategori);
     }
 
     /**
@@ -24,7 +27,7 @@ class InfoGrapikController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.kategori.infograpik.create');
     }
 
     /**
@@ -35,7 +38,16 @@ class InfoGrapikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|max:255'
+        ]);
+
+        $kategori = new KategoriInfo();
+        $kategori->nama = $request->input('nama');
+        $kategori->save();
+
+        Session::put('message', 'Data Berhasil Ditambah');
+        return redirect(route('index-kategori-infograpik'));
     }
 
     /**
@@ -55,9 +67,12 @@ class InfoGrapikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nama)
     {
-        //
+        $edit = KategoriInfo::where('nama', $nama)->get();
+        foreach ($edit as $key) {
+            return view('pages.kategori.infograpik.edit')->with('key', $key);
+        }
     }
 
     /**
@@ -69,7 +84,12 @@ class InfoGrapikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kategori = KategoriInfo::find($id);
+        $kategori->nama = $request->input('nama');
+        $kategori->update();
+
+        Session::put('message', 'Data Berhasil Diperbaharui');
+        return redirect(route('index-kategori-infograpik'));
     }
 
     /**
@@ -80,6 +100,10 @@ class InfoGrapikController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = KategoriInfo::find($id);
+        $delete->delete();
+
+        Session::put('message', 'Data Berhasil Dihapus');
+        return redirect(route('index-kategori-infograpik'));
     }
 }

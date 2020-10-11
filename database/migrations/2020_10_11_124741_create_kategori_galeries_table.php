@@ -15,6 +15,7 @@ class CreateKategoriGaleriesTable extends Migration
     {
         Schema::create('kategori_galeries', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->timestamps();
         });
     }

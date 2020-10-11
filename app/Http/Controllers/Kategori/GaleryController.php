@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Kategori;
 
+use App\Galery;
 use App\Http\Controllers\Controller;
+use App\KategoriGalery;
+use App\KategoriInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class GaleryController extends Controller
 {
@@ -14,7 +18,8 @@ class GaleryController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = KategoriGalery::paginate(10);
+        return view('pages.kategori.galery.index')->with('kategori', $kategori);
     }
 
     /**
@@ -24,7 +29,7 @@ class GaleryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.kategori.galery.create');
     }
 
     /**
@@ -35,7 +40,16 @@ class GaleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|max:255'
+        ]);
+
+        $kategori = new KategoriGalery();
+        $kategori->nama = $request->input('nama');
+        $kategori->save();
+
+        Session::put('message', 'Data Berhasil Ditambah');
+        return redirect(route('index-kategori-galery'));
     }
 
     /**
@@ -55,9 +69,12 @@ class GaleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nama)
     {
-        //
+        $edit = KategoriGalery::where('nama', $nama)->get();
+        foreach ($edit as $key) {
+            return view('pages.kategori.galery.edit')->with('key', $key);
+        }
     }
 
     /**
@@ -69,7 +86,12 @@ class GaleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kategori = KategoriGalery::find($id);
+        $kategori->nama = $request->input('nama');
+        $kategori->update();
+
+        Session::put('message', 'Data Berhasil Diperbaharui');
+        return redirect(route('index-kategori-galery'));
     }
 
     /**
@@ -80,6 +102,10 @@ class GaleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = KategoriGalery::find($id);
+        $delete->delete();
+
+        Session::put('message', 'Data Berhasil Dihapus');
+        return redirect(route('index-kategori-galery'));
     }
 }

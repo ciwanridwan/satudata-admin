@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePublikasisTable extends Migration
+class CreateUnitKerjasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePublikasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('publikasis', function (Blueprint $table) {
+        Schema::create('unit_kerjas', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->longText('isi');
-            $table->string('file');
-            $table->string('size_file');
+            $table->string('nama');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreatePublikasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publikasis');
+        Schema::dropIfExists('unit_kerjas');
     }
 }

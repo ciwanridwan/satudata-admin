@@ -35,6 +35,16 @@ Route::group(['prefix' => 'kategori'], function (){
     Route::post('infograpik/delete/{id}', 'Kategori\InfograpikController@destroy')->name('delete-kategori-infograpik');
 });
 
+// Publikasi
+Route::group(['prefix' => 'publikasi'], function (){
+    Route::post('/update/{id}', 'PublikasiController@update')->name('update-publikasi-admin');
+    Route::post('/store', 'PublikasiController@store')->name('store-publikasi-admin');
+    Route::post('/delete/{id}', 'PublikasiController@destroy')->name('delete-publikasi-admin');
+    Route::get('/create', 'PublikasiController@create')->name('create-publikasi-admin');
+    Route::get('/index', 'PublikasiController@index')->name('index-publikasi-admin');
+    Route::get('/edit/{judul}', 'PublikasiController@edit')->name('edit-publikasi-admin');
+});
+
 Route::group(['prefix' => 'user'], function (){
     Route::get('login', 'PublicUsersController@formLogin')->name('users-login');
     Route::get('register', 'PublicUsersController@formRegister')->name('users-register');

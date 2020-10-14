@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\InfoGrapik;
+use App\KategoriInfo;
+use App\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class InfoGrapikController extends Controller
 {
+    public function getCity()
+    {
+        $cities = City::where('province_id', request()->province_id)->get();
+        return response()->json(['status' => 'success', 'data' => $cities]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,9 @@ class InfoGrapikController extends Controller
      */
     public function index()
     {
-        //
+        $infograpik = InfoGrapik::paginate(10);
+        $kategori = KategoriInfo::all();
+        return view('admins.infograpik.index')->with('infograpik', $infograpik)->with('kategori', $kategori);
     }
 
     /**
@@ -23,7 +35,9 @@ class InfoGrapikController extends Controller
      */
     public function create()
     {
-        //
+        $provinces = Province::all();
+        $kategori = KategoriInfo::all();
+        return view('admins.infograpik.create')->with('provinces', $provinces)->with('kategori', $kategori);
     }
 
     /**
@@ -34,7 +48,23 @@ class InfoGrapikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, 
+        [
+            'judul' => 'required|unique:info_grapiks,judul|max:255',
+            'kategori_info_id' => 'required|exists:kategori_infos,id',
+            'province_id' => 'required|exists:provinces,id',
+            'city_id' => 'required|exists:cities,id',
+        ]);
+
+        $infograpik = new InfoGrapik();
+        $infograpik->judul = $request->input('judul');
+        $infograpik->kategori_info_id = $request->input('kategori_info_id');
+        $infograpik->province_id = $request->input('province_id');
+        $infograpik->city_id = $request->input('city_id');
+        $infograpik->save();
+
+        Session::put('message', 'Data berhasil ditambah');
+        return redirect(route('index-infograpik-admin'));
     }
 
     /**
@@ -54,9 +84,14 @@ class InfoGrapikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($judul)
     {
-        //
+        $edit = InfoGrapik::where('judul', $judul)->first();
+        $kategori = KategoriInfo::all();
+        $provinces = Province::all();
+        $city = City::all();
+        return view('admins.infograpik.edit')->with('edit', $edit)->with('kategori', $kategori)->with('provinces', $provinces)
+        ->with('city', $city);
     }
 
     /**
@@ -68,7 +103,15 @@ class InfoGrapikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = InfoGrapik::find($id);
+        $update->judul = $request->input('judul');
+        $update->kategori_info_id = $request->input('kategori_info_id');
+        $update->province_id = $request->input('province_id');
+        $update->city_id = $request->input('city_id');
+        $update->update();
+
+        Session::put('message', 'Data berhasil diperbaharui');
+        return redirect(route('index-infograpik-admin'));
     }
 
     /**
@@ -79,6 +122,10 @@ class InfoGrapikController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = InfoGrapik::find($id);
+        $delete->delete();
+
+        Session::put('message', 'Data berhasil dihapus');
+        return redirect(route('index-infograpik-admin'));
     }
 }

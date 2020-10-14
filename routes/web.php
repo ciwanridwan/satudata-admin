@@ -18,6 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// API City
+Route::get('/api/city/', 'InfograpikController@getCity');
+
 // KATEGORI INFOGRAPIK DAN GALERY
 Route::group(['prefix' => 'kategori'], function (){
     Route::get('galery', 'Kategori\GaleryController@index')->name('index-kategori-galery');
@@ -43,6 +46,16 @@ Route::group(['prefix' => 'publikasi'], function (){
     Route::get('/create', 'PublikasiController@create')->name('create-publikasi-admin');
     Route::get('/index', 'PublikasiController@index')->name('index-publikasi-admin');
     Route::get('/edit/{judul}', 'PublikasiController@edit')->name('edit-publikasi-admin');
+});
+
+// Infograpis
+Route::group(['prefix' => 'infograpik'], function (){
+    Route::post('/update/{id}', 'InfoGrapikController@update')->name('update-infograpik-admin');
+    Route::post('/store', 'InfoGrapikController@store')->name('store-infograpik-admin');
+    Route::post('/delete/{id}', 'InfoGrapikController@destroy')->name('delete-infograpik-admin');
+    Route::get('/create', 'InfoGrapikController@create')->name('create-infograpik-admin');
+    Route::get('/index', 'InfoGrapikController@index')->name('index-infograpik-admin');
+    Route::get('/edit/{judul}', 'InfoGrapikController@edit')->name('edit-infograpik-admin');
 });
 
 Route::group(['prefix' => 'user'], function (){

@@ -32,7 +32,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('index-infograpik-admin')}}">
           <i class="menu-icon typcn typcn-document-text"></i>
           <span class="menu-title">Infograpik</span>
         </a>

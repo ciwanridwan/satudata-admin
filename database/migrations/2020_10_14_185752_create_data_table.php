@@ -19,7 +19,7 @@ class CreateDataTable extends Migration
             $table->longText('isi');
             $table->string('file');
             $table->unsignedBigInteger('ketenagakerjaan_id');
-            $table->foreign('ketenagakerjaan_id')->references('ketenagakerjaans')->on('id');
+            $table->foreign('ketenagakerjaan_id')->references('id')->on('ketenagakerjaans');
             $table->timestamps();
         });
     }

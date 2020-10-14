@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Ketenagakerjaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class KetenagakerjaanController extends Controller
 {
@@ -13,7 +15,8 @@ class KetenagakerjaanController extends Controller
      */
     public function index()
     {
-        //
+        $ketenagakerjaan = Ketenagakerjaan::paginate(10);
+        return view('admins.ketenagakerjaan.index')->with('ketenagakerjaan', $ketenagakerjaan);
     }
 
     /**
@@ -23,7 +26,7 @@ class KetenagakerjaanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admins.ketenagakerjaan.create');
     }
 
     /**
@@ -34,7 +37,19 @@ class KetenagakerjaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, 
+        [
+            'nama' => 'required|unique:ketenagakerjaans,nama|max:255',
+            'kategori' => 'required|string|max:255'
+        ]);
+
+        $ketenagakerjaan = new Ketenagakerjaan();
+        $ketenagakerjaan->nama = $request->input('nama');
+        $ketenagakerjaan->kategori = $request->input('kategori');
+        $ketenagakerjaan->save();
+
+        Session::put('message', 'Data berhasil ditambah');
+        return redirect(route('index-ketenagakerjaan-admin'));
     }
 
     /**
@@ -54,9 +69,10 @@ class KetenagakerjaanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nama)
     {
-        //
+        $edit = Ketenagakerjaan::where('nama', $nama)->first();
+        return view('admins.ketenagakerjaan.edit')->with('edit', $edit);
     }
 
     /**
@@ -68,7 +84,13 @@ class KetenagakerjaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ketenagakerjaan = Ketenagakerjaan::find($id);
+        $ketenagakerjaan->nama = $request->input('nama');
+        $ketenagakerjaan->kategori = $request->input('kategori');
+        $ketenagakerjaan->update();
+
+        Session::put('message', 'Data berhasil diperbaharui');
+        return redirect(route('index-ketenagakerjaan-admin'));
     }
 
     /**
@@ -79,6 +101,10 @@ class KetenagakerjaanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ketenagakerjaan = Ketenagakerjaan::find($id);
+        $ketenagakerjaan->delete();
+
+        Session::put('message', 'Data berhasil dihapus');
+        return redirect(route('index-ketenagakerjaan-admin'));
     }
 }

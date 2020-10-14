@@ -19,9 +19,9 @@ class CreateInfoGrapiksTable extends Migration
             $table->unsignedBigInteger('kategori_info_id');
             $table->unsignedBigInteger('province_id');
             $table->unsignedBigInteger('city_id');
-            $table->foreign('kategori_info_id')->references('kategori_infos')->on('id');
-            $table->foreign('province_id')->references('provinces')->on('id');
-            $table->foreign('city_id')->references('cities')->on('id');
+            $table->foreign('kategori_info_id')->references('id')->on('kategori_infos');
+            $table->foreign('province_id')->references('id')->on('provinces');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->timestamps();
         });
     }

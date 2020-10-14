@@ -17,9 +17,7 @@ class CreateDataTable extends Migration
             $table->id();
             $table->string('judul');
             $table->longText('isi');
-            $table->foreignId('unit_kerja_id');
-            $table->foreignId('jenis_data_id');
-            $table->string('format_berkas');
+            $table->string('file');
             $table->timestamps();
         });
     }

@@ -18,7 +18,8 @@ class CreateDataTable extends Migration
             $table->string('judul');
             $table->longText('isi');
             $table->string('file');
-            $table->foreignId('ketenagakerjaan_id')->reference('ketenagakerjaans')->on('id');
+            $table->unsignedBigInteger('ketenagakerjaan_id');
+            $table->foreign('ketenagakerjaan_id')->references('ketenagakerjaans')->on('id');
             $table->timestamps();
         });
     }

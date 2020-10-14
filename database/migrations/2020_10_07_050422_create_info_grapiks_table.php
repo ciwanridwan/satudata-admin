@@ -16,9 +16,12 @@ class CreateInfoGrapiksTable extends Migration
         Schema::create('info_grapiks', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->foreignId('kategori_info_id')->references('kategori_infos')->on('id');
-            $table->foreignId('province_id')->references('provinces')->on('id');
-            $table->foreignId('city_id')->references('cities')->on('id');
+            $table->unsignedBigInteger('kategori_info_id');
+            $table->unsignedBigInteger('province_id');
+            $table->unsignedBigInteger('city_id');
+            $table->foreign('kategori_info_id')->references('kategori_infos')->on('id');
+            $table->foreign('province_id')->references('provinces')->on('id');
+            $table->foreign('city_id')->references('cities')->on('id');
             $table->timestamps();
         });
     }

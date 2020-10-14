@@ -58,6 +58,18 @@ Route::group(['prefix' => 'infograpik'], function (){
     Route::get('/edit/{judul}', 'InfoGrapikController@edit')->name('edit-infograpik-admin');
 });
 
+// Ketenagakerjaan
+Route::group(['prefix' => 'ketenagakerjaan'], function (){
+    Route::post('/update/{id}', 'KetenagakerjaanController@update')->name('update-ketenagakerjaan-admin');
+    Route::post('/store', 'KetenagakerjaanController@store')->name('store-ketenagakerjaan-admin');
+    Route::post('/delete/{id}', 'KetenagakerjaanController@destroy')->name('delete-ketenagakerjaan-admin');
+    Route::get('/create', 'KetenagakerjaanController@create')->name('create-ketenagakerjaan-admin');
+    Route::get('/index', 'KetenagakerjaanController@index')->name('index-ketenagakerjaan-admin');
+    Route::get('/edit/{judul}', 'KetenagakerjaanController@edit')->name('edit-ketenagakerjaan-admin');
+});
+
+
+
 Route::group(['prefix' => 'user'], function (){
     Route::get('login', 'PublicUsersController@formLogin')->name('users-login');
     Route::get('register', 'PublicUsersController@formRegister')->name('users-register');

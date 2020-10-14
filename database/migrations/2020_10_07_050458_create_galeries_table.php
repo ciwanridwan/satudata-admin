@@ -17,8 +17,9 @@ class CreateGaleriesTable extends Migration
             $table->id();
             $table->string('judul');
             $table->string('foto');
-            $table->foreignId('kategori_galery_id');
-            $table->integer('status')->default(0); // Untuk logic berita terpopuler
+            $table->unsignedBigInteger('kategori_galery_id');
+            $table->foreign('kategori_galery_id')->references('kategori_galeries')->on('id');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

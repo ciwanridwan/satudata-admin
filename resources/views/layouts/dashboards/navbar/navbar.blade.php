@@ -24,7 +24,11 @@
               <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
             </div>
             <a class="dropdown-item">My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
-            <a class="dropdown-item">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">Log Out<i class="dropdown-item-icon ti-power-off"></i></a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+          </form>
           </div>
         </li>
       </ul>

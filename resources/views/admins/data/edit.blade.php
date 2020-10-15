@@ -32,20 +32,30 @@ Edit Data
                                 <div class="form-group">
                                     <label for="judul">Judul</label>
                                     <input type="text" class="form-control" id="judul" name="judul" value="{{$edit->judul}}"
-                                    >
+                                        placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('judul') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="isi">Isi</label>
                                     <input type="text" class="form-control" id="isi" name="isi" value="{{$edit->isi}}"
-                                    >
+                                        placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('isi') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="file">File</label>
                                     <input type="file" class="form-control form-control-lg" id="file" name="file" value="{{$edit->file}}"
-                                    >
+                                        placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('file') }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ketenagakerjaan_id">ketenagakerjaan_id</label>
+                                    <select class="form-control" id="ketenagakerjaan_id" name="ketenagakerjaan_id">
+                                    <option value="{{$edit->ketenagakerjaan_id}}">Pilih Ketenagakerjaan</option>  
+                                      @foreach ($tenagakerja as $item)
+                                      <option value="{{$item->id}}">{{$item->nama}}</option>
+                                      @endforeach
+                                    </select>
+                                    <p class="text-danger">{{ $errors->first('ketenagakerjaan_id') }}</p>
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>

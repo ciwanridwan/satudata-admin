@@ -55,7 +55,7 @@ class PublikasiController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('file')->getClientOriginalExtension();
             $files = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('file')->storeAs('public/monevs/files', $files);
+            $path = $request->file('file')->storeAs('public/files', $files);
         } else {
             $files = 'nofile.pdf';
         }

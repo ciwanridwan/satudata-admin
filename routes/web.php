@@ -31,6 +31,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Ketenagakerjaan
+Route::group(['middleware' => 'auth'], function (){
+    
 Route::group(['prefix' => 'ketenagakerjaan'], function (){
     Route::post('/update/{id}', 'KetenagakerjaanController@update')->name('update-ketenagakerjaan-admin');
     Route::post('/store', 'KetenagakerjaanController@store')->name('store-ketenagakerjaan-admin');
@@ -60,6 +62,17 @@ Route::group(['prefix' => 'publikasi'], function (){
     Route::get('/edit/{judul}', 'PublikasiController@edit')->name('edit-publikasi-admin');
 });
 
+
+// Data
+Route::group(['prefix' => 'data'], function (){
+    Route::post('/update/{id}', 'DataController@update')->name('update-data-admin');
+    Route::post('/store', 'DataController@store')->name('store-data-admin');
+    Route::post('/delete/{id}', 'DataController@destroy')->name('delete-data-admin');
+    Route::get('/create', 'DataController@create')->name('create-data-admin');
+    Route::get('/index', 'DataController@index')->name('index-data-admin');
+    Route::get('/edit/{judul}', 'DataController@edit')->name('edit-data-admin');
+});
+
 // KATEGORI INFOGRAPIK DAN GALERY
 Route::group(['prefix' => 'kategori'], function (){
     Route::get('galery', 'Kategori\GaleryController@index')->name('index-kategori-galery');
@@ -75,4 +88,6 @@ Route::group(['prefix' => 'kategori'], function (){
     Route::get('infograpik/edit/{nama}', 'Kategori\InfograpikController@edit')->name('edit-kategori-infograpik');
     Route::post('infograpik/update/{id}', 'Kategori\InfograpikController@update')->name('update-kategori-infograpik');
     Route::post('infograpik/delete/{id}', 'Kategori\InfograpikController@destroy')->name('delete-kategori-infograpik');
+});
+
 });

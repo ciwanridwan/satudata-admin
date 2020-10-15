@@ -1,12 +1,8 @@
 @extends('layouts.dashboards.app')
 
-@section('title')
-Publikasi
-@endsection
-
+@section('title', 'Publikasi')
 
 @section('content')
-
 <div class="content-wrapper">
     <div class="row">
         <div class="col-md-12 d-flex align-items-stretch grid-margin">
@@ -31,21 +27,23 @@ Publikasi
                                 @method('POST')
                                 <div class="form-group">
                                     <label for="judul">Judul</label>
-                                    <input type="text" class="form-control" id="judul" name="judul" required
-                                        placeholder="..........">
+                                    <input type="text" class="form-control" id="judul" name="judul" required>
                                     <p class="text-danger">{{ $errors->first('judul') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="isi">Isi</label>
-                                    <input type="text" class="form-control" id="isi" name="isi" required
-                                        placeholder="..........">
+                                    <input type="text" class="form-control" id="isi" name="isi" required>
                                     <p class="text-danger">{{ $errors->first('isi') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="file">File</label>
-                                    <input type="file" class="form-control form-control-lg" id="file" name="file" required
-                                        placeholder="..........">
+                                    <input type="file" class="form-control form-control-lg" id="file" name="file" required>
                                     <p class="text-danger">{{ $errors->first('file') }}</p>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="file">Thumbnail</label>
+                                    <input type="file" class="form-control form-control-lg" id="thumbnail" name="thumbnail" required>
+                                    <p class="text-danger">{{ $errors->first('thumbnail') }}</p>
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
@@ -57,5 +55,4 @@ Publikasi
         </div>
     </div>
 </div>
-
 @endsection

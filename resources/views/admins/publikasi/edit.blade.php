@@ -1,12 +1,8 @@
 @extends('layouts.dashboards.app')
 
-@section('title')
-Edit Publikasi
-@endsection
-
+@section('title', 'Edit Publikasi')
 
 @section('content')
-
 <div class="content-wrapper">
     <div class="row">
         <div class="col-md-12 d-flex align-items-stretch grid-margin">
@@ -47,6 +43,11 @@ Edit Publikasi
                                     >
                                     <p class="text-danger">{{ $errors->first('file') }}</p>
                                 </div>
+                                <div class="form-group">
+                                    <label for="file">Thumbnail</label>
+                                    <input type="file" class="form-control form-control-lg" id="thumbnail" name="thumbnail">
+                                    <p class="text-danger">{{ $errors->first('thumbnail') }}</p>
+                                </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
                             <button class="btn btn-light">Cancel</button>
@@ -57,5 +58,4 @@ Edit Publikasi
         </div>
     </div>
 </div>
-
 @endsection

@@ -1,8 +1,6 @@
 @extends('layouts.dashboards.app')
 
-@section('title')
-Publikasi
-@endsection
+@section('title', 'Publikasi')
 
 @section('content')
 <div class="content-wrapper">
@@ -18,7 +16,6 @@ Publikasi
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </p>
-
                         {{Session::put('message', null)}}
                     </div>
                     @endif
@@ -28,6 +25,7 @@ Publikasi
                         <thead>
                             <tr>
                                 <th> No </th>
+                                <th> Thumbnail </th>
                                 <th> Judul </th>
                                 <th> Isi </th>
                                 <th> File </th>
@@ -40,16 +38,20 @@ Publikasi
                             $nomor = 1;
                             @endphp
                             <tr>
-                                @forelse ($publikasi as $item)
+                                @forelse ($publikasi as $key => $value)
                                 <td>{{$nomor}}</td>
-                                <td>{{$item->judul}}</td>
-                                <td>{{$item->isi}}</td>
-                                <td>{{$item->file}}</td>
-                                <td>{{$item->size_file}}</td>
-                                <td><a href="{{route('edit-publikasi-admin', $item->judul)}}"
-                                        class="btn btn-warning">Edit</a></td>
                                 <td>
-                                    <form action="{{route('delete-publikasi-admin', $item->id)}}" method="POST">
+                                    <img class="thumb-image" src="{{ url('storage/' . $value->thumbnail) }}" style="cursor: pointer;"" onclick="window.open('<?= url('storage/' . $value->thumbnail) ?>', '_blank');">
+                                </td>
+                                <td>{{$value->judul}}</td>
+                                <td>{{$value->isi}}</td>
+                                <td>{{$value->file}}</td>
+                                <td>{{$value->size_file}}</td>
+                                <td><a href="{{route('edit-publikasi-admin', $value->judul)}}"
+                                    class="btn btn-warning">Edit</a>
+                                </td>
+                                <td>
+                                    <form action="{{route('delete-publikasi-admin', $value->id)}}" method="POST">
                                         @csrf
                                         @method('POST')
                                         <button class="btn btn-danger">Hapus</button>

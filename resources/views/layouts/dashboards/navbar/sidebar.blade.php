@@ -44,7 +44,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('index-galeri-admin')}}">
           <i class="menu-icon typcn typcn-document-text"></i>
           <span class="menu-title">Galery</span>
         </a>

@@ -73,6 +73,16 @@ Route::group(['prefix' => 'data'], function (){
     Route::get('/edit/{judul}', 'DataController@edit')->name('edit-data-admin');
 });
 
+// GALERY
+Route::group(['prefix' => 'galeri'], function (){
+    Route::post('/update/{id}', 'GaleryController@update')->name('update-galeri-admin');
+    Route::post('/store', 'GaleryController@store')->name('store-galeri-admin');
+    Route::post('/delete/{id}', 'GaleryController@destroy')->name('delete-galeri-admin');
+    Route::get('/create', 'GaleryController@create')->name('create-galeri-admin');
+    Route::get('/index', 'GaleryController@index')->name('index-galeri-admin');
+    Route::get('/edit/{judul}', 'GaleryController@edit')->name('edit-galeri-admin');
+});
+
 // KATEGORI INFOGRAPIK DAN GALERY
 Route::group(['prefix' => 'kategori'], function (){
     Route::get('galery', 'Kategori\GaleryController@index')->name('index-kategori-galery');

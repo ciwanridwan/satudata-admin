@@ -1,7 +1,7 @@
 @extends('layouts.dashboards.app')
 
 @section('title')
-Galeri
+Edit Galeri
 @endsection
 
 

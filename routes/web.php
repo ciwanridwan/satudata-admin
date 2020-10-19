@@ -71,6 +71,17 @@ Route::group(['prefix' => 'data'], function (){
     Route::get('/create', 'DataController@create')->name('create-data-admin');
     Route::get('/index', 'DataController@index')->name('index-data-admin');
     Route::get('/edit/{judul}', 'DataController@edit')->name('edit-data-admin');
+    Route::get('/download/{file}', 'DataController@unduhFile')->name('download-file-data');
+});
+
+// News Flash
+Route::group(['prefix' => 'news-flash'], function (){
+    Route::post('/update/{id}', 'NewflashController@update')->name('update-newflash-admin');
+    Route::post('/store', 'NewflashController@store')->name('store-newflash-admin');
+    Route::post('/delete/{id}', 'NewflashController@destroy')->name('delete-newflash-admin');
+    Route::get('/create', 'NewflashController@create')->name('create-newflash-admin');
+    Route::get('/index', 'NewflashController@index')->name('index-newflash-admin');
+    Route::get('/edit/{judul}', 'NewflashController@edit')->name('edit-newflash-admin');
 });
 
 // GALERY

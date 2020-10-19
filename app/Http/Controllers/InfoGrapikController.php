@@ -7,7 +7,9 @@ use App\InfoGrapik;
 use App\KategoriInfo;
 use App\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class InfoGrapikController extends Controller
 {
@@ -54,13 +56,24 @@ class InfoGrapikController extends Controller
             'kategori_info_id' => 'required|exists:kategori_infos,id',
             'province_id' => 'required|exists:provinces,id',
             'city_id' => 'required|exists:cities,id',
+            'gambar' => 'required|image|mimes:jpg,jpeg,png'
         ]);
+        if ($request->hasFile('gambar')) {
+            $fileNameWithExtension = $request->file('gambar')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('gambar')->getClientOriginalExtension();
+            $gambar = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('gambar')->storeAs('public/infograpiks', $gambar);
+        } else {
+            $gambar = 'noimage.jpg';
+        }
 
         $infograpik = new InfoGrapik();
         $infograpik->judul = $request->input('judul');
         $infograpik->kategori_info_id = $request->input('kategori_info_id');
         $infograpik->province_id = $request->input('province_id');
         $infograpik->city_id = $request->input('city_id');
+        $infograpik->gambar = $gambar;
         $infograpik->save();
 
         Session::put('message', 'Data berhasil ditambah');
@@ -108,6 +121,18 @@ class InfoGrapikController extends Controller
         $update->kategori_info_id = $request->input('kategori_info_id');
         $update->province_id = $request->input('province_id');
         $update->city_id = $request->input('city_id');
+        if ($request->hasFile('gambar')) {
+            $fileNameWithExtension = $request->file('gambar')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('gambar')->getClientOriginalExtension();
+            $gambar = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('gambar')->storeAs('public/infograpiks', $gambar);
+            $select_old_gambar_name = DB::table('info_grapiks')->where('id', $request->id)->first();
+            $update->gambar = $gambar;   
+            if ($select_old_gambar_name != 'noimage.jpg') {
+                Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
+            }
+        }
         $update->update();
 
         Session::put('message', 'Data berhasil diperbaharui');

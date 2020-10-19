@@ -59,6 +59,8 @@ Data
                                         <button class="btn btn-danger">Hapus</button>
                                     </form>
                                 </td>
+                                {{-- <td><a href="{{route('download-file-data', $item->file)}}"
+                                    class="btn btn-info">Download</a></td> --}}
                             </tr>
                             @php
                             $nomor = $nomor + 1;

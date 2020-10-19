@@ -26,7 +26,8 @@ Input Infograpik
                             {{Session::put('message', null)}}
                             @endif
                             <h4 class="card-title">Input Infograpik</h4>
-                            <form class="forms-sample" action="{{route('store-infograpik-admin')}}" method="POST" enctype="multipart/form-data">
+                            <form id="formuploadimage" class="forms-sample" action="{{route('store-infograpik-admin')}}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
                                 <div class="form-group">
@@ -42,7 +43,7 @@ Input Infograpik
                                         @foreach ($kategori as $item)
                                         <option value="{{$item->id}}">{{$item->nama}}</option>
                                         @endforeach
-                                      </select>
+                                    </select>
                                     <p class="text-danger">{{ $errors->first('kategori_info_id') }}</p>
                                 </div>
 
@@ -53,7 +54,7 @@ Input Infograpik
                                         @foreach ($provinces as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
-                                      </select>
+                                    </select>
                                     <p class="text-danger">{{ $errors->first('province_id') }}</p>
                                 </div>
 
@@ -61,8 +62,15 @@ Input Infograpik
                                     <label for="city_id">Pilih Kabupaten/Kota</label>
                                     <select class="form-control" id="city_id" name="city_id" required>
                                         <option value="">Pilih Kabupaten/Kota</option>
-                                      </select>
+                                    </select>
                                     <p class="text-danger">{{ $errors->first('city_id') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gambar">Upload Gambar</label>
+                                    <input type="file" class="form-control form-control-lg" onChange="displayImage(this)" id="displayGambar" name="gambar"
+                                        required placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('gambar') }}</p>
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
@@ -77,8 +85,8 @@ Input Infograpik
 @endsection
 
 @section('js-province')
-    <script>
-        $('#province_id').on('change', function() {
+<script>
+    $('#province_id').on('change', function() {
             $.ajax({
                 url: "{{ url('/api/city') }}",
                 type: "GET",
@@ -93,5 +101,9 @@ Input Infograpik
                 }
             });
         })
-    </script>
+</script>
+
+<script>
+
+</script>
 @endsection

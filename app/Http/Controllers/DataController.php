@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Data;
 use App\Ketenagakerjaan;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response as FacadesResponse;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class DataController extends Controller
 {
+    public function unduhFile($file)
+    {
+        $data = Data::where('file', $file)->first();
+        $path = public_path('storage/files/'. $data->file);
+        return Storage::download($path);
+        // $path = public_path('files/'.$file);
+        // return response()->download($path);
+    }
     /**
      * Display a listing of the resource.
      *

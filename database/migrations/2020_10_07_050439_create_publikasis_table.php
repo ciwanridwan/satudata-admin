@@ -19,6 +19,8 @@ class CreatePublikasisTable extends Migration
             $table->longText('isi');
             $table->string('file');
             $table->string('size_file');
+            $table->string('file_path');
+            $table->string('thumbnail');
             $table->timestamps();
         });
     }

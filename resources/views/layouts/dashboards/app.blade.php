@@ -25,7 +25,7 @@
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
-      @include('layouts.dashboards.navbar.navbar')
+      {{-- @include('layouts.dashboards.navbar.navbar') --}}
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
@@ -38,7 +38,7 @@
           {{-- END CONTENT --}}
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-         @include('layouts.dashboards.footer.footer')
+         {{-- @include('layouts.dashboards.footer.footer') --}}
           <!-- partial -->
         </div>
         <!-- main-panel ends -->

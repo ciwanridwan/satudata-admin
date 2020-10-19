@@ -30,6 +30,7 @@ Infograpik
                                 <th> No </th>
                                 <th> Judul </th>
                                 <th> Kategori </th>
+                                <th> Gambar </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@ Infograpik
                                     <td>{{$k->nama}}</td>
                                     @endif
                                 @endforeach
+                                <td><img src="{{ asset('storage/infograpiks/'. $item->gambar)}}" alt=""></td>
                                 <td><a href="{{route('edit-infograpik-admin', $item->judul)}}"
                                         class="btn btn-warning">Edit</a></td>
                                 <td>

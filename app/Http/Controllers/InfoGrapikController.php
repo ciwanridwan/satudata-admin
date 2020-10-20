@@ -66,7 +66,7 @@ class InfoGrapikController extends Controller
             $gambar = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('gambar')->storeAs('public/infograpiks', $gambar);
         } else {
-            $gambar = 'noimage.jpg';
+            $gambar = '';
         }
 
         $infograpik = new InfoGrapik();

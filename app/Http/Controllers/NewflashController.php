@@ -38,9 +38,10 @@ class NewflashController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,
-        [
-            'judul' => 'required|string|max:255'
-        ]);
+            [
+                'judul' => 'required|string|max:255'
+            ]
+        );
 
         $new = new NewsFlash();
         $new->judul = $request->input('judul');
@@ -82,6 +83,12 @@ class NewflashController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,
+            [
+                'judul' => 'required|string|max:255'
+            ]
+        );
+        
         $new = NewsFlash::find($id);
         $new->judul = $request->input('judul');
         $new->update();

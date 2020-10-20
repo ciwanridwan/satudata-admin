@@ -73,7 +73,7 @@ class DataController extends Controller
             $files = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('file')->storeAs('public/files', $files);
         } else {
-            $files = 'nofile.pdf';
+            $files = '';
         }
 
 
@@ -153,6 +153,7 @@ class DataController extends Controller
             'isi' => 'required',
             'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
             'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+            'abstraksi' => 'required',
         ]);
 
         $data =  Data::find($id);
@@ -165,8 +166,6 @@ class DataController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
             $files = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('file')->storeAs('public/files', $files);
-        } else {
-            $files = 'nofile.pdf';
         }
         
         if ($sizeFile >= 1073741824) {

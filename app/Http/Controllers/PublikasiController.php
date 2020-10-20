@@ -45,7 +45,7 @@ class PublikasiController extends Controller
             [
                 'judul' => 'required|max:255|unique:publikasis,judul',
                 'isi' => 'required',
-                'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,pptx',
+                'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,pptx,zip',
                 'thumbnail' => 'required|mimes:jpeg,bmp,png',
             ], $customMessage);
 
@@ -144,7 +144,7 @@ class PublikasiController extends Controller
             [
                 'judul' => 'string|max:255',
                 'isi' => '',
-                'file' => 'mimes:pdf,doc,docx,xlsx,xls,pptx',
+                'file' => 'mimes:pdf,doc,docx,xlsx,xls,pptx,zip',
                 'thumbnail' => 'required|mimes:jpeg,bmp,png',
             ]);
 

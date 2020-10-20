@@ -55,7 +55,7 @@ class DataController extends Controller
         [
             'judul' => 'required|unique:data,judul|max:255',
             'isi' => 'required',
-            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls',
+            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
             'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
         ]);
 

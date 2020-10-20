@@ -56,7 +56,7 @@ class DataController extends Controller
         $this->validate($request, 
             [
                 'judul' => 'required|unique:data,judul|max:255',
-                'isi' => 'required|max:200',
+                'isi' => 'required|max:270',
                 'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
                 'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
                 'abstraksi' => 'required',

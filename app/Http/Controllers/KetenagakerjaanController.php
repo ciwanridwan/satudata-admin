@@ -38,10 +38,11 @@ class KetenagakerjaanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, 
-        [
-            'nama' => 'required|unique:ketenagakerjaans,nama|max:255',
-            'kategori' => 'required|string|max:255'
-        ]);
+            [
+                'nama' => 'required|unique:ketenagakerjaans,nama|max:255',
+                'kategori' => 'required|string|max:255'
+            ]
+        );
 
         $ketenagakerjaan = new Ketenagakerjaan();
         $ketenagakerjaan->nama = $request->input('nama');
@@ -84,6 +85,13 @@ class KetenagakerjaanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, 
+            [
+                'nama' => 'required|unique:ketenagakerjaans,nama|max:255',
+                'kategori' => 'required|string|max:255'
+            ]
+        );
+        
         $ketenagakerjaan = Ketenagakerjaan::find($id);
         $ketenagakerjaan->nama = $request->input('nama');
         $ketenagakerjaan->kategori = $request->input('kategori');

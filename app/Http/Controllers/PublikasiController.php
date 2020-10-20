@@ -41,13 +41,16 @@ class PublikasiController extends Controller
             'unique' => ':attribute Sudah digunakan, tidak boleh sama'
         ];
 
-        $this->validate($request,
+        $this->validate(
+            $request,
             [
                 'judul' => 'required|max:255|unique:publikasis,judul',
                 'isi' => 'required',
-                'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,pptx,zip',
+                'file' => 'required|mimes:pdf',
                 'thumbnail' => 'required|mimes:jpeg,bmp,png',
-            ], $customMessage);
+            ],
+            $customMessage
+        );
 
         if ($request->hasFile('file')) {
             $fileNameWithExtension = $request->file('file')->getClientOriginalName();
@@ -57,7 +60,7 @@ class PublikasiController extends Controller
             $files = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('file')->storeAs('public/files', $files);
         } else {
-            $files = 'nofile.pdf';
+            $files = '';
         }
 
         if ($request->hasFile('thumbnail')) {
@@ -144,9 +147,10 @@ class PublikasiController extends Controller
             [
                 'judul' => 'string|max:255',
                 'isi' => '',
-                'file' => 'mimes:pdf,doc,docx,xlsx,xls,pptx,zip',
-                'thumbnail' => 'required|mimes:jpeg,bmp,png',
-            ]);
+                'file' => 'mimes:pdf',
+                'thumbnail' => 'mimes:jpeg,bmp,png',
+            ]
+        );
 
         $publikasi = Publikasi::find($id);
         $publikasi->judul = $request->input('judul');
@@ -187,8 +191,6 @@ class PublikasiController extends Controller
             $publikasi->file = $files;
             $publikasi->file_path = $path;
             $publikasi->size_file = $sizeFile;
-        } else {
-            $files = 'nofile.pdf';
         }
 
         if ($request->hasFile('thumbnail')) {

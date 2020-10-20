@@ -52,12 +52,13 @@ class DataController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, 
-        [
-            'judul' => 'required|unique:data,judul|max:255',
-            'isi' => 'required',
-            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
-            'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
-        ]);
+            [
+                'judul' => 'required|unique:data,judul|max:255',
+                'isi' => 'required',
+                'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
+                'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+            ]
+        );
 
         if ($request->hasFile('file')) {
             $fileNameWithExtension = $request->file('file')->getClientOriginalName();
@@ -67,7 +68,7 @@ class DataController extends Controller
             $files = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('file')->storeAs('public/files', $files);
         } else {
-            $files = 'nofile.pdf';
+            $files = '';
         }
 
         $data = new Data();
@@ -114,6 +115,15 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, 
+            [
+                'judul' => 'required|unique:data,judul|max:255',
+                'isi' => 'required',
+                'file' => 'mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
+                'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+            ]
+        );
+
         $data =  Data::find($id);
         $data->judul = $request->input('judul');
         $data->isi = $request->input('isi');
@@ -124,8 +134,6 @@ class DataController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
             $files = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('file')->storeAs('public/files', $files);
-        } else {
-            $files = 'nofile.pdf';
         }
         $data->file = $files;
         $data->ketenagakerjaan_id = $request->input('ketenagakerjaan_id');

@@ -43,11 +43,12 @@ class GaleryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, 
-        [
-            'judul' => 'required|unique:galeries,judul|max:255',
-            'kategori_galery_id' => 'required|exists:kategori_galeries,id',
-            'foto' => 'required|image|mimes:jpg,jpeg,png'
-        ]);
+            [
+                'judul' => 'required|unique:galeries,judul|max:255',
+                'kategori_galery_id' => 'required|exists:kategori_galeries,id',
+                'foto' => 'required|image|mimes:jpg,jpeg,png'
+            ]
+        );
 
         if ($request->hasFile('foto')) {
             $fileNameWithExtension = $request->file('foto')->getClientOriginalName();
@@ -56,7 +57,7 @@ class GaleryController extends Controller
             $foto = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('foto')->storeAs('public/photos', $foto);
         } else {
-            $foto = 'noimage.jpg';
+            $foto = '';
         }
         $galeri = new Galery();
         $galeri->judul = $request->input('judul');
@@ -101,6 +102,14 @@ class GaleryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, 
+            [
+                'judul' => 'required|unique:galeries,judul|max:255',
+                'kategori_galery_id' => 'required|exists:kategori_galeries,id',
+                'foto' => 'image|mimes:jpg,jpeg,png'
+            ]
+        );
+
         $galeri = Galery::find($id);
         if ($request->hasFile('foto')) {
             $fileNameWithExtension = $request->file('foto')->getClientOriginalName();
@@ -116,6 +125,7 @@ class GaleryController extends Controller
                 Storage::delete('public/photos', $select_old_gambar_name->foto);
             }
         } 
+        
         $galeri->judul = $request->input('judul');
         $galeri->kategori_galery_id = $request->input('kategori_galery_id');
         $galeri->update();

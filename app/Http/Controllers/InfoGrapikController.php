@@ -51,13 +51,15 @@ class InfoGrapikController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, 
-        [
-            'judul' => 'required|unique:info_grapiks,judul|max:255',
-            'kategori_info_id' => 'required|exists:kategori_infos,id',
-            'province_id' => 'required|exists:provinces,id',
-            'city_id' => 'required|exists:cities,id',
-            'gambar' => 'required|image|mimes:jpg,jpeg,png'
-        ]);
+            [
+                'judul' => 'required|unique:info_grapiks,judul|max:255',
+                'kategori_info_id' => 'required|exists:kategori_infos,id',
+                'province_id' => 'required|exists:provinces,id',
+                'city_id' => 'required|exists:cities,id',
+                'gambar' => 'required|image|mimes:jpg,jpeg,png'
+            ]
+        );
+
         if ($request->hasFile('gambar')) {
             $fileNameWithExtension = $request->file('gambar')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
@@ -65,7 +67,7 @@ class InfoGrapikController extends Controller
             $gambar = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('gambar')->storeAs('public/infograpiks', $gambar);
         } else {
-            $gambar = 'noimage.jpg';
+            $gambar = '';
         }
 
         $infograpik = new InfoGrapik();
@@ -116,6 +118,16 @@ class InfoGrapikController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, 
+            [
+                'judul' => 'required|unique:info_grapiks,judul|max:255',
+                'kategori_info_id' => 'required|exists:kategori_infos,id',
+                'province_id' => 'required|exists:provinces,id',
+                'city_id' => 'required|exists:cities,id',
+                'gambar' => 'image|mimes:jpg,jpeg,png'
+            ]
+        );
+
         $update = InfoGrapik::find($id);
         $update->judul = $request->input('judul');
         $update->kategori_info_id = $request->input('kategori_info_id');

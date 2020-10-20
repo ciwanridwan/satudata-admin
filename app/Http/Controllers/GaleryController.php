@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Galery;
+use App\Gambar;
 use App\KategoriGalery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +47,12 @@ class GaleryController extends Controller
             [
                 'judul' => 'required|unique:galeries,judul|max:255',
                 'kategori_galery_id' => 'required|exists:kategori_galeries,id',
-                'foto' => 'required|image|mimes:jpg,jpeg,png'
+                'foto' => 'required|image|mimes:jpg,jpeg,png',
+                'picture' => 'required|image|mimes:jpg,jpeg,png',
+                'picture2' => 'required|image|mimes:jpg,jpeg,png',
+                'picture3' => 'required|image|mimes:jpg,jpeg,png',
+                'picture4' => 'required|image|mimes:jpg,jpeg,png',
+                'picture5' => 'required|image|mimes:jpg,jpeg,png'
             ]
         );
 
@@ -65,6 +71,77 @@ class GaleryController extends Controller
         $galeri->foto = $foto;
         $galeri->save();
 
+        if ($request->hasFile('picture')) {
+            $fileNameWithExtension = $request->file('picture')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $picture = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('picture')->storeAs('public/photos', $picture);
+        } else {
+            $picture = 'noimage.jpg';
+        }
+
+        if ($request->hasFile('picture2')) {
+            $fileNameWithExtension = $request->file('picture2')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('picture2')->getClientOriginalExtension();
+            $picture2 = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('picture2')->storeAs('public/photos', $picture2);
+        } else {
+            $picture2 = 'noimage.jpg';
+        }
+
+
+        if ($request->hasFile('picture3')) {
+            $fileNameWithExtension = $request->file('picture3')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('picture3')->getClientOriginalExtension();
+            $picture3 = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('picture3')->storeAs('public/photos', $picture3);
+        } else {
+            $picture3 = 'noimage.jpg';
+        }
+
+        if ($request->hasFile('picture4')) {
+            $fileNameWithExtension = $request->file('picture4')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('picture4')->getClientOriginalExtension();
+            $picture4 = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('picture4')->storeAs('public/photos', $picture4);
+        } else {
+            $picture4 = 'noimage.jpg';
+        }
+
+        if ($request->hasFile('picture5')) {
+            $fileNameWithExtension = $request->file('picture5')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('picture5')->getClientOriginalExtension();
+            $picture5 = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('picture5')->storeAs('public/photos', $picture5);
+        } else {
+            $picture5 = 'noimage.jpg';
+        }
+ 
+            $pictures = new Gambar();
+            $pictures->picture = $picture;
+            $galeri->gambars()->save($pictures);
+
+            $pictureTwo = new Gambar();
+            $pictureTwo->picture = $picture2;
+            $galeri->gambars()->save($pictureTwo);
+
+            $pictureTree = new Gambar();
+            $pictureTree->picture = $picture3;
+            $galeri->gambars()->save($pictureTree);
+
+            $pictureFour = new Gambar();
+            $pictureFour->picture = $picture4;
+            $galeri->gambars()->save($pictureFour);
+
+            $pictureFive = new Gambar();
+            $pictureFive->picture = $picture5;
+            $galeri->gambars()->save($pictureFive);
+            
         Session::put('message', 'Data berhasil ditambah');
         return redirect(route('index-galeri-admin'));
     }

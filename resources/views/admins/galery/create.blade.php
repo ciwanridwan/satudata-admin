@@ -47,12 +47,46 @@ Tambah Galeri
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="foto">foto</label>
+                                    <label for="foto">Picture</label>
                                     <input type="file" class="form-control form-control-lg" id="foto" name="foto" required
                                         placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('foto') }}</p>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="picture">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture" name="picture" required
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture2">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture2" name="picture2" required
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture2') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture3">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture3" name="picture3" required
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture3') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture4">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture4" name="picture4" required
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture4') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture5">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture5" name="picture5" required
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture5') }}</p>
+                                </div>
                                 
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>

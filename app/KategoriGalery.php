@@ -8,5 +8,5 @@ class KategoriGalery extends Model
 {
     protected $primaryKey = 'id';
     
-    protected $tables = 'kategori_galeries';
+    protected $tables = 'kategori_galeries'; 
 }

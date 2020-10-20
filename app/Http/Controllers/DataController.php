@@ -14,11 +14,8 @@ class DataController extends Controller
 {
     public function unduhFile($file)
     {
-        $data = Data::where('file', $file)->first();
-        $path = public_path('storage/files/'. $data->file);
-        return Storage::download($path);
-        // $path = public_path('files/'.$file);
-        // return response()->download($path);
+        $file_path = public_path('files/' . $file);
+        return response()->download($file_path);
     }
     /**
      * Display a listing of the resource.
@@ -56,14 +53,16 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, 
-        [
-            'judul' => 'required|unique:data,judul|max:255',
-            'isi' => 'required',
-            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
-            'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
-            'abstraksi' => 'required',
-        ]);
+        $this->validate(
+            $request,
+            [
+                'judul' => 'required|unique:data,judul|max:255',
+                'isi' => 'required',
+                'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
+                'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+                'abstraksi' => 'required',
+            ]
+        );
 
         if ($request->hasFile('file')) {
             $fileNameWithExtension = $request->file('file')->getClientOriginalName();
@@ -78,26 +77,16 @@ class DataController extends Controller
 
 
         if ($sizeFile >= 1073741824) {
-            $sizeFile = number_format($sizeFile / 1073741824, 2).'GB';
-        }
-        elseif ($sizeFile >= 1048576)
-        {
+            $sizeFile = number_format($sizeFile / 1073741824, 2) . 'GB';
+        } elseif ($sizeFile >= 1048576) {
             $sizeFile = number_format($sizeFile / 1048576, 2) . ' MB';
-        }
-        elseif ($sizeFile >= 1024)
-        {
+        } elseif ($sizeFile >= 1024) {
             $sizeFile = number_format($sizeFile / 1024, 2) . ' KB';
-        }
-        elseif ($sizeFile > 1)
-        {
+        } elseif ($sizeFile > 1) {
             $sizeFile = $sizeFile . ' bytes';
-        }
-        elseif ($sizeFile == 1)
-        {
+        } elseif ($sizeFile == 1) {
             $sizeFile = $sizeFile . ' byte';
-        }
-        else
-        {
+        } else {
             $sizeFile = '0 bytes';
         }
 
@@ -147,14 +136,16 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, 
-        [
-            'judul' => 'required|unique:data,judul|max:255',
-            'isi' => 'required',
-            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
-            'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
-            'abstraksi' => 'required',
-        ]);
+        $this->validate(
+            $request,
+            [
+                'judul' => 'required|unique:data,judul|max:255',
+                'isi' => 'required',
+                'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
+                'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+                'abstraksi' => 'required',
+            ]
+        );
 
         $data =  Data::find($id);
         $data->judul = $request->input('judul');
@@ -167,28 +158,18 @@ class DataController extends Controller
             $files = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('file')->storeAs('public/files', $files);
         }
-        
+
         if ($sizeFile >= 1073741824) {
-            $sizeFile = number_format($sizeFile / 1073741824, 2).'GB';
-        }
-        elseif ($sizeFile >= 1048576)
-        {
+            $sizeFile = number_format($sizeFile / 1073741824, 2) . 'GB';
+        } elseif ($sizeFile >= 1048576) {
             $sizeFile = number_format($sizeFile / 1048576, 2) . ' MB';
-        }
-        elseif ($sizeFile >= 1024)
-        {
+        } elseif ($sizeFile >= 1024) {
             $sizeFile = number_format($sizeFile / 1024, 2) . ' KB';
-        }
-        elseif ($sizeFile > 1)
-        {
+        } elseif ($sizeFile > 1) {
             $sizeFile = $sizeFile . ' bytes';
-        }
-        elseif ($sizeFile == 1)
-        {
+        } elseif ($sizeFile == 1) {
             $sizeFile = $sizeFile . ' byte';
-        }
-        else
-        {
+        } else {
             $sizeFile = '0 bytes';
         }
         $data->file = $files;

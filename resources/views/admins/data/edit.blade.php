@@ -57,6 +57,12 @@ Edit Data
                                     </select>
                                     <p class="text-danger">{{ $errors->first('ketenagakerjaan_id') }}</p>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="abstraksi">Abstraksi</label>
+                                    <textarea name="abstraksi" id="description" class="form-control">{{ old('description') }}</textarea>
+                                    <p class="text-danger">{{ $errors->first('abstraksi') }}</p>
+                                </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
                             <button class="btn btn-light">Cancel</button>
@@ -68,4 +74,11 @@ Edit Data
     </div>
 </div>
 
+@endsection
+
+@section('js-deskripsi')
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('description');
+    </script>
 @endsection

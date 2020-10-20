@@ -101,6 +101,13 @@ class GaleryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, 
+        [
+            'judul' => 'required|unique:galeries,judul|max:255',
+            'kategori_galery_id' => 'required|exists:kategori_galeries,id',
+            'foto' => 'required|image|mimes:jpg,jpeg,png'
+        ]);
+        
         $galeri = Galery::find($id);
         if ($request->hasFile('foto')) {
             $fileNameWithExtension = $request->file('foto')->getClientOriginalName();

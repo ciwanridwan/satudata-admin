@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePublikasisTable extends Migration
+class AddFieldSizeFilesToDataTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreatePublikasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('publikasis', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul');
-            $table->longText('isi');
-            $table->string('file');
-            $table->string('size_file');
-            $table->timestamps();
+        Schema::table('data', function (Blueprint $table) {
+            $table->string('size_files')->nullable()->after('file');
         });
     }
 
@@ -30,6 +25,8 @@ class CreatePublikasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publikasis');
+        Schema::table('data', function (Blueprint $table) {
+            //
+        });
     }
 }

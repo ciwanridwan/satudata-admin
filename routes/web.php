@@ -39,7 +39,7 @@ Route::group(['prefix' => 'ketenagakerjaan'], function (){
     Route::post('/delete/{id}', 'KetenagakerjaanController@destroy')->name('delete-ketenagakerjaan-admin');
     Route::get('/create', 'KetenagakerjaanController@create')->name('create-ketenagakerjaan-admin');
     Route::get('/index', 'KetenagakerjaanController@index')->name('index-ketenagakerjaan-admin');
-    Route::get('/edit/{judul}', 'KetenagakerjaanController@edit')->name('edit-ketenagakerjaan-admin');
+    Route::get('/edit/{nama}', 'KetenagakerjaanController@edit')->name('edit-ketenagakerjaan-admin');
 });
 
 // Infograpis

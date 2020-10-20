@@ -24,6 +24,7 @@ Kategori Infograpik
                     @endif
                     <h4 class="card-title">Kategori Infograpik</h4>
                     <a href="{{route('create-kategori-infograpik')}}" class="btn btn-primary">Tambah</a>
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -60,6 +61,7 @@ Kategori Infograpik
                             @endforelse
                         </tbody>
                     </table>
+                    </div>
                     {{$kategori->links()}}
                 </div>
             </div>

@@ -24,6 +24,7 @@ Kategori Galery
                     @endif
                     <h4 class="card-title">Kategori Galery</h4>
                     <a href="{{route('create-kategori-galery')}}" class="btn btn-primary">Tambah</a>
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -60,6 +61,7 @@ Kategori Galery
                             @endforelse
                         </tbody>
                     </table>
+                    </div>
                     {{$kategori->links()}}
                 </div>
             </div>

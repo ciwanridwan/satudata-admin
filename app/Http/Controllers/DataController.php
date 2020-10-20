@@ -27,8 +27,13 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::paginate(10);
+        $data = Data::orderBy('created_at', 'desc');
         $tenagakerja = Ketenagakerjaan::all();
+        if (request()->q != '') {
+            $data = $data->where('judul', 'LIKE', '%' . request()->q . '%');
+        }
+        $data = $data->paginate(10);
+        // dd($data);
         return view('admins.data.index')->with('data', $data)->with('tenagakerja', $tenagakerja);
     }
 
@@ -57,6 +62,7 @@ class DataController extends Controller
             'isi' => 'required',
             'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
             'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+            'abstraksi' => 'required',
         ]);
 
         if ($request->hasFile('file')) {
@@ -70,10 +76,37 @@ class DataController extends Controller
             $files = 'nofile.pdf';
         }
 
+
+        if ($sizeFile >= 1073741824) {
+            $sizeFile = number_format($sizeFile / 1073741824, 2).'GB';
+        }
+        elseif ($sizeFile >= 1048576)
+        {
+            $sizeFile = number_format($sizeFile / 1048576, 2) . ' MB';
+        }
+        elseif ($sizeFile >= 1024)
+        {
+            $sizeFile = number_format($sizeFile / 1024, 2) . ' KB';
+        }
+        elseif ($sizeFile > 1)
+        {
+            $sizeFile = $sizeFile . ' bytes';
+        }
+        elseif ($sizeFile == 1)
+        {
+            $sizeFile = $sizeFile . ' byte';
+        }
+        else
+        {
+            $sizeFile = '0 bytes';
+        }
+
         $data = new Data();
         $data->judul = $request->input('judul');
         $data->isi = $request->input('isi');
         $data->file = $files;
+        $data->size_files = $sizeFile;
+        $data->abstraksi = $request->input('abstraksi');
         $data->ketenagakerjaan_id = $request->input('ketenagakerjaan_id');
         $data->save();
 
@@ -114,6 +147,14 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, 
+        [
+            'judul' => 'required|unique:data,judul|max:255',
+            'isi' => 'required',
+            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
+            'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+        ]);
+
         $data =  Data::find($id);
         $data->judul = $request->input('judul');
         $data->isi = $request->input('isi');
@@ -127,8 +168,34 @@ class DataController extends Controller
         } else {
             $files = 'nofile.pdf';
         }
+        
+        if ($sizeFile >= 1073741824) {
+            $sizeFile = number_format($sizeFile / 1073741824, 2).'GB';
+        }
+        elseif ($sizeFile >= 1048576)
+        {
+            $sizeFile = number_format($sizeFile / 1048576, 2) . ' MB';
+        }
+        elseif ($sizeFile >= 1024)
+        {
+            $sizeFile = number_format($sizeFile / 1024, 2) . ' KB';
+        }
+        elseif ($sizeFile > 1)
+        {
+            $sizeFile = $sizeFile . ' bytes';
+        }
+        elseif ($sizeFile == 1)
+        {
+            $sizeFile = $sizeFile . ' byte';
+        }
+        else
+        {
+            $sizeFile = '0 bytes';
+        }
         $data->file = $files;
         $data->ketenagakerjaan_id = $request->input('ketenagakerjaan_id');
+        $data->size_files = $sizeFile;
+        $data->abstraksi = $request->input('abstraksi');
         $data->update();
 
         Session::put('message', 'Data berhasil Diperbaharui');

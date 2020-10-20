@@ -18,7 +18,6 @@ Galeri
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </p>
-
                         {{Session::put('message', null)}}
                     </div>
                     @endif

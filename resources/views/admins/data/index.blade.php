@@ -22,6 +22,14 @@ Data
                         {{Session::put('message', null)}}
                     </div>
                     @endif
+                    <form class="ml-auto search-form d-none d-md-block col-md-4" action="" method="GET"
+                        action="{{route('index-data-admin')}}">
+                        <div class="form-group">
+                            <input type="search" class="form-control" placeholder="Cari Judul" name="q"
+                                value="{{ request()->q }}">
+                        </div>
+                        <button class="btn btn-dark btn-rounded btn-fw">Cari</button>
+                    </form>
                     <h4 class="card-title">Data</h4>
                     <a href="{{route('create-data-admin')}}" class="btn btn-primary">Tambah</a>
                     <div class="table-responsive">
@@ -51,7 +59,8 @@ Data
                                     <td>{{$tg->nama}}</td>
                                     @endif
                                     @endforeach
-                                    <td><a href="{{route('edit-data-admin', $item->judul)}}" class="btn btn-warning">Edit</a></td>
+                                    <td><a href="{{route('edit-data-admin', $item->judul)}}"
+                                            class="btn btn-warning">Edit</a></td>
                                     <td>
                                         <form action="{{route('delete-data-admin', $item->id)}}" method="POST">
                                             @csrf
@@ -60,7 +69,7 @@ Data
                                         </form>
                                     </td>
                                     {{-- <td><a href="{{route('download-file-data', $item->file)}}"
-                                        class="btn btn-info">Download</a></td> --}}
+                                    class="btn btn-info">Download</a></td> --}}
                                 </tr>
                                 @php
                                 $nomor = $nomor + 1;

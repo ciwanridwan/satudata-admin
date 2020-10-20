@@ -84,10 +84,16 @@ class KetenagakerjaanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, 
+        [
+            'nama' => 'required|unique:ketenagakerjaans,nama|max:255',
+            'kategori' => 'required|string|max:255'
+        ]);
         $ketenagakerjaan = Ketenagakerjaan::find($id);
         $ketenagakerjaan->nama = $request->input('nama');
         $ketenagakerjaan->kategori = $request->input('kategori');
         $ketenagakerjaan->update();
+        // dd($ketenagakerjaan);
 
         Session::put('message', 'Data berhasil diperbaharui');
         return redirect(route('index-ketenagakerjaan-admin'));

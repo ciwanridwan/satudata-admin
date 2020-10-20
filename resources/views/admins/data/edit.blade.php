@@ -48,7 +48,7 @@ Edit Data
                                     <p class="text-danger">{{ $errors->first('file') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ketenagakerjaan_id">ketenagakerjaan_id</label>
+                                    <label for="ketenagakerjaan_id">Ketenagakerjaan</label>
                                     <select class="form-control" id="ketenagakerjaan_id" name="ketenagakerjaan_id">
                                     <option value="{{$edit->ketenagakerjaan_id}}">Pilih Ketenagakerjaan</option>  
                                       @foreach ($tenagakerja as $item)

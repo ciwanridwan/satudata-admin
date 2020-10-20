@@ -140,13 +140,17 @@ class PublikasiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $customMessage = [
+            'unique' => ':attribute Sudah digunakan, tidak boleh sama'
+        ];
+
         $this->validate($request,
             [
-                'judul' => 'string|max:255',
-                'isi' => '',
-                'file' => 'mimes:pdf,doc,docx,xlsx,xls,pptx,zip',
+                'judul' => 'required|max:255|unique:publikasis,judul',
+                'isi' => 'required',
+                'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,pptx,zip',
                 'thumbnail' => 'required|mimes:jpeg,bmp,png',
-            ]);
+            ], $customMessage);
 
         $publikasi = Publikasi::find($id);
         $publikasi->judul = $request->input('judul');

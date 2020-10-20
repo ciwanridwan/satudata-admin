@@ -53,16 +53,14 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(
-            $request,
-            [
-                'judul' => 'required|unique:data,judul|max:255',
-                'isi' => 'required',
-                'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
-                'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
-                'abstraksi' => 'required',
-            ]
-        );
+        $this->validate($request, 
+        [
+            'judul' => 'required|unique:data,judul|max:255',
+            'isi' => 'required|max:42',
+            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
+            'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+            'abstraksi' => 'required',
+        ]);
 
         if ($request->hasFile('file')) {
             $fileNameWithExtension = $request->file('file')->getClientOriginalName();
@@ -136,6 +134,7 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         $this->validate(
             $request,
             [
@@ -146,6 +145,16 @@ class DataController extends Controller
                 'abstraksi' => 'required',
             ]
         );
+=======
+        $this->validate($request, 
+        [
+            'judul' => 'required|unique:data,judul|max:255',
+            'isi' => 'required|max:42',
+            'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
+            'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
+            'abstraksi' => 'required',
+        ]);
+>>>>>>> d4f738b76cfa15a8daafa5c1923e8d66cbd2559d
 
         $data =  Data::find($id);
         $data->judul = $request->input('judul');

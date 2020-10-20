@@ -137,7 +137,7 @@ class DataController extends Controller
         $this->validate($request, 
             [
                 'judul' => 'required|unique:data,judul|max:255',
-                'isi' => 'required|max:200',
+                'isi' => 'required|max:320',
                 'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
                 'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
                 'abstraksi' => 'required',
@@ -154,24 +154,26 @@ class DataController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
             $files = $fileName . '_' . time() . '.' . $extension;
             $path = $request->file('file')->storeAs('public/files', $files);
+
+            if ($sizeFile >= 1073741824) {
+                $sizeFile = number_format($sizeFile / 1073741824, 2) . 'GB';
+            } elseif ($sizeFile >= 1048576) {
+                $sizeFile = number_format($sizeFile / 1048576, 2) . ' MB';
+            } elseif ($sizeFile >= 1024) {
+                $sizeFile = number_format($sizeFile / 1024, 2) . ' KB';
+            } elseif ($sizeFile > 1) {
+                $sizeFile = $sizeFile . ' bytes';
+            } elseif ($sizeFile == 1) {
+                $sizeFile = $sizeFile . ' byte';
+            } else {
+                $sizeFile = '0 bytes';
+            }
+
+            $data->file = $files;
+            $data->size_files = $sizeFile;
         }
 
-        if ($sizeFile >= 1073741824) {
-            $sizeFile = number_format($sizeFile / 1073741824, 2) . 'GB';
-        } elseif ($sizeFile >= 1048576) {
-            $sizeFile = number_format($sizeFile / 1048576, 2) . ' MB';
-        } elseif ($sizeFile >= 1024) {
-            $sizeFile = number_format($sizeFile / 1024, 2) . ' KB';
-        } elseif ($sizeFile > 1) {
-            $sizeFile = $sizeFile . ' bytes';
-        } elseif ($sizeFile == 1) {
-            $sizeFile = $sizeFile . ' byte';
-        } else {
-            $sizeFile = '0 bytes';
-        }
-        $data->file = $files;
         $data->ketenagakerjaan_id = $request->input('ketenagakerjaan_id');
-        $data->size_files = $sizeFile;
         $data->abstraksi = $request->input('abstraksi');
         $data->update();
 

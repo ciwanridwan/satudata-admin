@@ -22,7 +22,6 @@ class CreateInfoGrapiksTable extends Migration
             $table->foreign('kategori_info_id')->references('id')->on('kategori_infos');
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('city_id')->references('id')->on('cities');
-            $table->string('gambar');
             $table->timestamps();
         });
     }

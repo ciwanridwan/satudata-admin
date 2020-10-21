@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+    <title>Satudata - Register</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('src/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('src/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css')}}">
@@ -21,7 +21,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('src/assets/css/demo_1/style.css')}}">
     <!-- End Layout styles -->
-    <link rel="shortcut icon" href="{{asset('src/assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('src/assets/images/logos.ico')}}" />
 </head>
 
 <body>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="text-block text-center my-3">
                                     <span class="text-small font-weight-semibold">Already have and account ?</span>
-                                    <a href="login.html" class="text-black text-small">Login</a>
+                                    <a href="{{route('login')}}" class="text-black text-small">Login</a>
                                 </div>
                             </form>
                         </div>

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>
+    <title>Satudata - Login</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('src/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('src/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css')}}">
@@ -18,7 +18,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('src/assets/css/shared/style.css')}}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{asset('src/assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('src/assets/images/logos.ico')}}" />
 </head>
 
 <body>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="text-block text-center my-3">
                                     <span class="text-small font-weight-semibold">Not a member ?</span>
-                                    <a href="register.html" class="text-black text-small">Create new account</a>
+                                    <a href="{{route('register')}}" class="text-black text-small">Create new account</a>
                                 </div>
                             </form>
                         </div>

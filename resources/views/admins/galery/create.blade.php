@@ -47,7 +47,7 @@ Tambah Galeri
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="foto">Picture</label>
+                                    <label for="foto">Foto Utama</label>
                                     <input type="file" class="form-control form-control-lg" id="foto" name="foto" required
                                         placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('foto') }}</p>
@@ -79,13 +79,6 @@ Tambah Galeri
                                     <input type="file" class="form-control form-control-lg" id="picture4" name="picture4" required
                                         placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('picture4') }}</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="picture5">Picture</label>
-                                    <input type="file" class="form-control form-control-lg" id="picture5" name="picture5" required
-                                        placeholder="..........">
-                                    <p class="text-danger">{{ $errors->first('picture5') }}</p>
                                 </div>
                                 
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>

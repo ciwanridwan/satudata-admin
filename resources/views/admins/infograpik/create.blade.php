@@ -72,6 +72,13 @@ Input Infograpik
                                         required placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('gambar') }}</p>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="content">Konten</label>
+                                    <textarea name="content" id="init-ckeditor" class="form-control">{{ old('content') }}</textarea>
+                                    <p class="text-danger">{{ $errors->first('content') }}</p>
+                                </div>
+
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
                             <button class="btn btn-light">Cancel</button>

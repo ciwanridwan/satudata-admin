@@ -53,6 +53,7 @@ class InfoGrapikController extends Controller
         $this->validate($request, 
         [
             'judul' => 'required|unique:info_grapiks,judul|max:255',
+            'content' => 'required',
             'kategori_info_id' => 'required|exists:kategori_infos,id',
             'province_id' => 'required|exists:provinces,id',
             'city_id' => 'required|exists:cities,id',
@@ -71,6 +72,7 @@ class InfoGrapikController extends Controller
 
         $infograpik = new InfoGrapik();
         $infograpik->judul = $request->input('judul');
+        $infograpik->content = $request->input('content');
         $infograpik->kategori_info_id = $request->input('kategori_info_id');
         $infograpik->province_id = $request->input('province_id');
         $infograpik->city_id = $request->input('city_id');
@@ -119,7 +121,8 @@ class InfoGrapikController extends Controller
     {
         $this->validate($request, 
         [
-            'judul' => 'required|unique:info_grapiks,judul|max:255',
+            'judul' => 'required|max:255',
+            'content' => 'required',
             'kategori_info_id' => 'required|exists:kategori_infos,id',
             'province_id' => 'required|exists:provinces,id',
             'city_id' => 'required|exists:cities,id',
@@ -128,6 +131,7 @@ class InfoGrapikController extends Controller
         
         $update = InfoGrapik::find($id);
         $update->judul = $request->input('judul');
+        $update->content = $request->input('content');
         $update->kategori_info_id = $request->input('kategori_info_id');
         $update->province_id = $request->input('province_id');
         $update->city_id = $request->input('city_id');

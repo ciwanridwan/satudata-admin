@@ -79,6 +79,13 @@ Edit Infograpik
                                     </select>
                                     <p class="text-danger">{{ $errors->first('city_id') }}</p>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="content">Konten</label>
+                                    <textarea name="content" id="init-ckeditor" class="form-control">{{ $edit->content }}</textarea>
+                                    <p class="text-danger">{{ $errors->first('content') }}</p>
+                                </div>
+
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
                             <button class="btn btn-light">Cancel</button>

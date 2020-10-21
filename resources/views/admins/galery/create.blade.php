@@ -80,6 +80,12 @@ Tambah Galeri
                                         placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('picture4') }}</p>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="description">Deskripsi</label>
+                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
+                                    <p class="text-danger">{{ $errors->first('description') }}</p>
+                                </div>
                                 
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
@@ -110,5 +116,12 @@ Tambah Galeri
                 }
             });
         })
+    </script>
+@endsection
+
+@section('js-deskripsi')
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('description');
     </script>
 @endsection

@@ -25,9 +25,9 @@ class InfoGrapikController extends Controller
      */
     public function index()
     {
-        $infograpik = InfoGrapik::paginate(10);
-        $kategori = KategoriInfo::all();
-        return view('admins.infograpik.index')->with('infograpik', $infograpik)->with('kategori', $kategori);
+        $data['infograpik'] = InfoGrapik::paginate(10);
+        $data['kategori'] = KategoriInfo::all();
+        return view('admins.infograpik.index')->with($data);
     }
 
     /**
@@ -37,9 +37,9 @@ class InfoGrapikController extends Controller
      */
     public function create()
     {
-        $provinces = Province::all();
-        $kategori = KategoriInfo::all();
-        return view('admins.infograpik.create')->with('provinces', $provinces)->with('kategori', $kategori);
+        $data['provinces'] = Province::all();
+        $data['kategori'] = KategoriInfo::all();
+        return view('admins.infograpik.create')->with($data);
     }
 
     /**
@@ -64,7 +64,7 @@ class InfoGrapikController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('gambar')->getClientOriginalExtension();
             $gambar = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('gambar')->storeAs('public/files/infograpiks', $gambar);
+            $path = $request->file('gambar')->storeAs('public/files/infografik', $gambar);
         } else {
             $gambar = '';
         }
@@ -136,11 +136,11 @@ class InfoGrapikController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('gambar')->getClientOriginalExtension();
             $gambar = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('gambar')->storeAs('public/files/infograpiks', $gambar);
+            $path = $request->file('gambar')->storeAs('public/files/infografik', $gambar);
             $select_old_gambar_name = DB::table('info_grapiks')->where('id', $request->id)->first();
             $update->gambar = $gambar;   
             if ($select_old_gambar_name != 'noimage.jpg') {
-                Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
+                Storage::delete('public/infografik', $select_old_gambar_name->foto);
             }
         }
         $update->update();

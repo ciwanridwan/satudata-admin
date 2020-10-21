@@ -48,7 +48,7 @@ Infograpik
                                     <td>{{$k->nama}}</td>
                                     @endif
                                     @endforeach
-                                    <td><img src="{{ asset('storage/files/infograpiks/'. $item->gambar)}}" alt=""></td>
+                                    <td><img src="{{ asset('storage/files/infografik/'. $item->gambar)}}" alt=""></td>
                                     <td><a href="{{route('edit-infograpik-admin', $item->judul)}}" class="btn btn-warning">Edit</a></td>
                                     <td>
                                         <form action="{{route('delete-infograpik-admin', $item->id)}}" method="POST">

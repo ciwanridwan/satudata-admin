@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 // API City
-Route::get('/api/city/', 'InfograpikController@getCity');
+Route::get('/api/city/', 'InfoGrapikController@getCity');
 
 
 // Route::group(['prefix' => 'user'], function (){

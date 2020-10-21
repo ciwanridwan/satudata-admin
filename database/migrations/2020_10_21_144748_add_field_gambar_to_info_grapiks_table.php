@@ -14,7 +14,7 @@ class AddFieldGambarToInfoGrapiksTable extends Migration
     public function up()
     {
         Schema::table('info_grapiks', function (Blueprint $table) {
-            $table->string('gambar')->after('city_id');
+            $table->string('gambar');
         });
     }
 

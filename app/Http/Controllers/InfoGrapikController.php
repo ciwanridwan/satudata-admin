@@ -64,7 +64,7 @@ class InfoGrapikController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('gambar')->getClientOriginalExtension();
             $gambar = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('gambar')->storeAs('public/infograpiks', $gambar);
+            $path = $request->file('gambar')->storeAs('public/files/infograpiks', $gambar);
         } else {
             $gambar = '';
         }
@@ -123,7 +123,7 @@ class InfoGrapikController extends Controller
             'kategori_info_id' => 'required|exists:kategori_infos,id',
             'province_id' => 'required|exists:provinces,id',
             'city_id' => 'required|exists:cities,id',
-            'gambar' => 'required|image|mimes:jpg,jpeg,png'
+            'gambar' => 'image|mimes:jpg,jpeg,png'
         ]);
         
         $update = InfoGrapik::find($id);
@@ -136,7 +136,7 @@ class InfoGrapikController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('gambar')->getClientOriginalExtension();
             $gambar = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('gambar')->storeAs('public/infograpiks', $gambar);
+            $path = $request->file('gambar')->storeAs('public/files/infograpiks', $gambar);
             $select_old_gambar_name = DB::table('info_grapiks')->where('id', $request->id)->first();
             $update->gambar = $gambar;   
             if ($select_old_gambar_name != 'noimage.jpg') {

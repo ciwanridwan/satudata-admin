@@ -103,14 +103,14 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('galery/update/{id}', 'Kategori\GaleryController@update')->name('update-kategori-galery');
         Route::post('galery/delete/{id}', 'Kategori\GaleryController@destroy')->name('delete-kategori-galery'); 
 
-        Route::get('infograpik', 'Kategori\InfograpikController@index')->name('index-kategori-infograpik');
-        Route::get('infograpik/create', 'Kategori\InfograpikController@create')->name('create-kategori-infograpik');
-        Route::post('infograpik/store', 'Kategori\InfograpikController@store')->name('store-kategori-infograpik');
-        Route::get('infograpik/edit/{nama}', 'Kategori\InfograpikController@edit')->name('edit-kategori-infograpik');
-        Route::post('infograpik/update/{id}', 'Kategori\InfograpikController@update')->name('update-kategori-infograpik');
-        Route::post('infograpik/delete/{id}', 'Kategori\InfograpikController@destroy')->name('delete-kategori-infograpik');
+        Route::get('infograpik', 'Kategori\InfoGrapikController@index')->name('index-kategori-infograpik');
+        Route::get('infograpik/create', 'Kategori\InfoGrapikController@create')->name('create-kategori-infograpik');
+        Route::post('infograpik/store', 'Kategori\InfoGrapikController@store')->name('store-kategori-infograpik');
+        Route::get('infograpik/edit/{nama}', 'Kategori\InfoGrapikController@edit')->name('edit-kategori-infograpik');
+        Route::post('infograpik/update/{id}', 'Kategori\InfoGrapikController@update')->name('update-kategori-infograpik');
+        Route::post('infograpik/delete/{id}', 'Kategori\InfoGrapikController@destroy')->name('delete-kategori-infograpik');
     });
-    
+
     // Route::get('1nf0-' . date('Ym'), function() {
     //     phpinfo();
     // });

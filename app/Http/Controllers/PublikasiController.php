@@ -63,17 +63,6 @@ class PublikasiController extends Controller
             $files = '';
         }
 
-        if ($request->hasFile('thumbnail')) {
-            $fileNameWithExtension = $request->file('thumbnail')->getClientOriginalName();
-            $sizeFile = $request->file('thumbnail')->getSize();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('thumbnail')->getClientOriginalExtension();
-            $thumbnail_files = $fileName . '_' . time() . '.' . $extension;
-            $thumbnail_path = $request->file('thumbnail')->storeAs('public/files', $thumbnail_files);
-        } else {
-            $thumbnail_path = '';
-        }
-
         if ($sizeFile >= 1073741824) {
             $sizeFile = number_format($sizeFile / 1073741824, 2).'GB';
         }
@@ -97,6 +86,17 @@ class PublikasiController extends Controller
         {
             $sizeFile = '0 bytes';
         }
+
+        if ($request->hasFile('thumbnail')) {
+            $fileNameWithExtension = $request->file('thumbnail')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail')->getClientOriginalExtension();
+            $thumbnail_files = $fileName . '_' . time() . '.' . $extension;
+            $thumbnail_path = $request->file('thumbnail')->storeAs('public/files', $thumbnail_files);
+        } else {
+            $thumbnail_path = '';
+        }
+
 
         $publikasi = new Publikasi();
         $publikasi->judul = $request->input('judul');
@@ -199,7 +199,6 @@ class PublikasiController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $fileNameWithExtension = $request->file('thumbnail')->getClientOriginalName();
-            $sizeFile = $request->file('thumbnail')->getSize();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('thumbnail')->getClientOriginalExtension();
             $files = $fileName . '_' . time() . '.' . $extension;
@@ -209,7 +208,6 @@ class PublikasiController extends Controller
         }
 
         $publikasi->update();
-        // dd($publikasi->size_file);
 
         Session::put('message', 'Data berhasil diperbaharui');
         return redirect(route('index-publikasi-admin'));

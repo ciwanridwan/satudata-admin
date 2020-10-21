@@ -110,8 +110,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('infograpik/update/{id}', 'Kategori\InfograpikController@update')->name('update-kategori-infograpik');
         Route::post('infograpik/delete/{id}', 'Kategori\InfograpikController@destroy')->name('delete-kategori-infograpik');
     });
-
-    Route::get('1nf0-' . date('Ym'), function() {
-        phpinfo();
-    });
+    
+    // Route::get('1nf0-' . date('Ym'), function() {
+    //     phpinfo();
+    // });
 });

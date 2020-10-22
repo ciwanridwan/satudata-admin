@@ -67,6 +67,12 @@ Input Infograpik
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="gambar">Thumbnail</label>
+                                    <input type="file" class="form-control form-control-lg" name="thumbnail" required>
+                                    <p class="text-danger">{{ $errors->first('thumbnail') }}</p>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="gambar">Upload Gambar</label>
                                     <input type="file" class="form-control form-control-lg" onChange="displayImage(this)" id="displayGambar" name="gambar"
                                         required placeholder="..........">

@@ -53,12 +53,23 @@ class InfoGrapikController extends Controller
         $this->validate($request, 
         [
             'judul' => 'required|unique:info_grapiks,judul|max:255',
+            'thumbnail' => 'required|mimes:jpeg,bmp,png',
             'content' => 'required',
             'kategori_info_id' => 'required|exists:kategori_infos,id',
             'province_id' => 'required|exists:provinces,id',
             'city_id' => 'required|exists:cities,id',
             'gambar' => 'required|image|mimes:jpg,jpeg,png'
         ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $fileNameWithExtension = $request->file('thumbnail')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail')->getClientOriginalExtension();
+            $thumbnail = $fileName . '_' . time() . '.' . $extension;
+            $thumbnail_path = $request->file('thumbnail')->storeAs('public/files/infografik', $thumbnail);
+        } else {
+            $thumbnail_path = '';
+        }
 
         if ($request->hasFile('gambar')) {
             $fileNameWithExtension = $request->file('gambar')->getClientOriginalName();
@@ -77,6 +88,7 @@ class InfoGrapikController extends Controller
         $infograpik->province_id = $request->input('province_id');
         $infograpik->city_id = $request->input('city_id');
         $infograpik->gambar = $gambar;
+        $infograpik->thumbnail = str_replace('public/', null, $thumbnail_path);
         $infograpik->save();
 
         Session::put('message', 'Data berhasil ditambah');
@@ -122,6 +134,7 @@ class InfoGrapikController extends Controller
         $this->validate($request, 
         [
             'judul' => 'required|max:255',
+            'thumbnail' => 'mimes:jpeg,bmp,png',
             'content' => 'required',
             'kategori_info_id' => 'required|exists:kategori_infos,id',
             'province_id' => 'required|exists:provinces,id',
@@ -135,6 +148,16 @@ class InfoGrapikController extends Controller
         $update->kategori_info_id = $request->input('kategori_info_id');
         $update->province_id = $request->input('province_id');
         $update->city_id = $request->input('city_id');
+
+        if ($request->hasFile('thumbnail')) {
+            $fileNameWithExtension = $request->file('thumbnail')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('thumbnail')->getClientOriginalExtension();
+            $thumbnail = $fileName . '_' . time() . '.' . $extension;
+            $thumbnail_path = $request->file('thumbnail')->storeAs('public/files/infografik', $thumbnail);
+            $update->thumbnail = str_replace('public/', null, $thumbnail_path);
+        }
+
         if ($request->hasFile('gambar')) {
             $fileNameWithExtension = $request->file('gambar')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);

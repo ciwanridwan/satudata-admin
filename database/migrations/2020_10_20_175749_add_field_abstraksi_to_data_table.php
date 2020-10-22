@@ -14,7 +14,7 @@ class AddFieldAbstraksiToDataTable extends Migration
     public function up()
     {
         Schema::table('data', function (Blueprint $table) {
-            $table->string('abstraksi')->nullable()->after('size_files');
+            $table->text('abstraksi')->nullable()->after('size_files');
         });
     }
 

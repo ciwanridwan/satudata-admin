@@ -53,11 +53,47 @@ Edit Galeri
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="foto">foto</label>
+                                    <label for="foto">Foto Utama</label>
                                     <input type="file" class="form-control form-control-lg" id="foto" name="foto"
-                                        placeholder=".........." value="{{$edit->foto}}">
+                                        placeholder="..........">
                                     <p class="text-danger">{{ $errors->first('foto') }}</p>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="picture">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture" name="picture"
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture2">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture2" name="picture2"
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture2') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture3">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture3" name="picture3"
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture3') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="picture4">Picture</label>
+                                    <input type="file" class="form-control form-control-lg" id="picture4" name="picture4"
+                                        placeholder="..........">
+                                    <p class="text-danger">{{ $errors->first('picture4') }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">Deskripsi</label>
+                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{$edit->description}}</textarea>
+                                    <p class="text-danger">{{ $errors->first('description') }}</p>
+                                </div>
+
+
 
                                 
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
@@ -89,5 +125,12 @@ Edit Galeri
                 }
             });
         })
+    </script>
+@endsection
+
+@section('js-deskripsi')
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('description');
     </script>
 @endsection

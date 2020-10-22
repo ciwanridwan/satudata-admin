@@ -62,7 +62,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('foto')->getClientOriginalExtension();
             $foto = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('foto')->storeAs('public/photos', $foto);
+            $path = $request->file('foto')->storeAs('public/files/photos', $foto);
         } else {
             $foto = '';
         }
@@ -79,7 +79,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture')->getClientOriginalExtension();
             $picture = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture')->storeAs('public/photos', $picture);
+            $path = $request->file('picture')->storeAs('public/files/photos', $picture);
         } else {
             $picture = 'noimage.jpg';
         }
@@ -89,7 +89,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture2')->getClientOriginalExtension();
             $picture2 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture2')->storeAs('public/photos', $picture2);
+            $path = $request->file('picture2')->storeAs('public/files/photos', $picture2);
         } else {
             $picture2 = 'noimage.jpg';
         }
@@ -100,7 +100,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture3')->getClientOriginalExtension();
             $picture3 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture3')->storeAs('public/photos', $picture3);
+            $path = $request->file('picture3')->storeAs('public/files/photos', $picture3);
         } else {
             $picture3 = 'noimage.jpg';
         }
@@ -110,7 +110,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture4')->getClientOriginalExtension();
             $picture4 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture4')->storeAs('public/photos', $picture4);
+            $path = $request->file('picture4')->storeAs('public/files/photos', $picture4);
         } else {
             $picture4 = 'noimage.jpg';
         }
@@ -173,13 +173,13 @@ class GaleryController extends Controller
             [
                 'judul' => 'required|unique:galeries,judul|max:255',
                 'kategori_galery_id' => 'required|exists:kategori_galeries,id',
-                'foto' => 'required|image|mimes:jpg,jpeg,png',
+                'foto' => 'image|mimes:jpg,jpeg,png',
                 'judul' => 'required|string',
                 'description' => 'required|string',
-                'picture' => 'required|image|mimes:jpg,jpeg,png',
-                'picture2' => 'required|image|mimes:jpg,jpeg,png',
-                'picture3' => 'required|image|mimes:jpg,jpeg,png',
-                'picture4' => 'required|image|mimes:jpg,jpeg,png'
+                'picture' => 'image|mimes:jpg,jpeg,png',
+                'picture2' => 'image|mimes:jpg,jpeg,png',
+                'picture3' => 'image|mimes:jpg,jpeg,png',
+                'picture4' => 'image|mimes:jpg,jpeg,png'
             ]
         );
 
@@ -189,13 +189,13 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('foto')->getClientOriginalExtension();
             $foto = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('foto')->storeAs('public/photos', $foto);
+            $path = $request->file('foto')->storeAs('public/files/photos', $foto);
             $galeri->foto = $foto;
 
             $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
 
             if ($select_old_gambar_name != 'noimage.jpg') {
-                Storage::delete('public/photos', $select_old_gambar_name->foto);
+                Storage::delete('public/files/photos', $select_old_gambar_name->foto);
             }
         }
 
@@ -211,7 +211,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture')->getClientOriginalExtension();
             $picture = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture')->storeAs('public/photos', $picture);
+            $path = $request->file('picture')->storeAs('public/files/photos', $picture);
             $pictures->picture = $picture;
             $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
             if ($select_old_gambar_name != 'noimage.jpg') {
@@ -226,7 +226,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture2')->getClientOriginalExtension();
             $picture2 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture2')->storeAs('public/photos', $picture2);
+            $path = $request->file('picture2')->storeAs('public/files/photos', $picture2);
             $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
             $pictureTwo->picture = $picture2;
             if ($select_old_gambar_name != 'noimage.jpg') {
@@ -241,7 +241,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture3')->getClientOriginalExtension();
             $picture3 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture3')->storeAs('public/photos', $picture3);
+            $path = $request->file('picture3')->storeAs('public/files/photos', $picture3);
             $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
             $pictureTree->picture = $picture3;
             if ($select_old_gambar_name != 'noimage.jpg') {
@@ -257,7 +257,7 @@ class GaleryController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('picture4')->getClientOriginalExtension();
             $picture4 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture4')->storeAs('public/photos', $picture4);
+            $path = $request->file('picture4')->storeAs('public/files/photos', $picture4);
             $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
             $pictureFour->picture = $picture4;
             if ($select_old_gambar_name != 'noimage.jpg') {

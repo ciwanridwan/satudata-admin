@@ -166,7 +166,7 @@ class PublikasiController extends Controller
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('file')->getClientOriginalExtension();
             $files = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('file')->storeAs('public/monevs/files', $files);
+            $path = $request->file('file')->storeAs('public/files', $files);
 
             if ($sizeFile >= 1073741824) {
                 $sizeFile = number_format($sizeFile / 1073741824, 2).'GB';

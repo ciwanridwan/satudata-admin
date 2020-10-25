@@ -37,7 +37,6 @@ class InfoGrapikController extends Controller
      */
     public function create()
     {
-        $data['provinces'] = Province::all();
         $data['kategori'] = KategoriInfo::all();
         return view('admins.infograpik.create')->with($data);
     }
@@ -56,8 +55,6 @@ class InfoGrapikController extends Controller
             'thumbnail' => 'required|mimes:jpeg,bmp,png',
             'content' => 'required',
             'kategori_info_id' => 'required|exists:kategori_infos,id',
-            'province_id' => 'required|exists:provinces,id',
-            'city_id' => 'required|exists:cities,id',
             'gambar' => 'required|image|mimes:jpg,jpeg,png'
         ]);
 
@@ -85,8 +82,8 @@ class InfoGrapikController extends Controller
         $infograpik->judul = $request->input('judul');
         $infograpik->content = $request->input('content');
         $infograpik->kategori_info_id = $request->input('kategori_info_id');
-        $infograpik->province_id = $request->input('province_id');
-        $infograpik->city_id = $request->input('city_id');
+        $infograpik->province_id = $pid = Province::first()->id;
+        $infograpik->city_id = City::where('province_id', $pid)->first()->id;
         $infograpik->gambar = $gambar;
         $infograpik->thumbnail = str_replace('public/', null, $thumbnail_path);
         $infograpik->save();
@@ -137,8 +134,6 @@ class InfoGrapikController extends Controller
             'thumbnail' => 'mimes:jpeg,bmp,png',
             'content' => 'required',
             'kategori_info_id' => 'required|exists:kategori_infos,id',
-            'province_id' => 'required|exists:provinces,id',
-            'city_id' => 'required|exists:cities,id',
             'gambar' => 'image|mimes:jpg,jpeg,png'
         ]);
         
@@ -146,8 +141,6 @@ class InfoGrapikController extends Controller
         $update->judul = $request->input('judul');
         $update->content = $request->input('content');
         $update->kategori_info_id = $request->input('kategori_info_id');
-        $update->province_id = $request->input('province_id');
-        $update->city_id = $request->input('city_id');
 
         if ($request->hasFile('thumbnail')) {
             $fileNameWithExtension = $request->file('thumbnail')->getClientOriginalName();

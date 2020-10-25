@@ -59,19 +59,16 @@ class DataController extends Controller
                 'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
                 'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
                 'abstraksi' => 'required',
-            ]);
+            ]
+        );
 
+        $files = '';
+        $sizeFile = 0;
         if ($request->hasFile('file')) {
-            $fileNameWithExtension = $request->file('file')->getClientOriginalName();
+            $path = $request->file('file')->store('public/files');
+            $files = str_replace('public/files/', null, $path);
             $sizeFile = $request->file('file')->getSize();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $files = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('file')->storeAs('public/files', $files);
-        } else {
-            $files = '';
         }
-
 
         if ($sizeFile >= 1073741824) {
             $sizeFile = number_format($sizeFile / 1073741824, 2) . 'GB';

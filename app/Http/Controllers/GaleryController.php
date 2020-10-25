@@ -48,88 +48,41 @@ class GaleryController extends Controller
             [
                 'judul' => 'required|unique:galeries,judul|max:255',
                 'kategori_galery_id' => 'required|exists:kategori_galeries,id',
-                'foto' => 'required|image|mimes:jpg,jpeg,png',
-                'picture' => 'required|image|mimes:jpg,jpeg,png',
-                'picture2' => 'required|image|mimes:jpg,jpeg,png',
-                'picture3' => 'required|image|mimes:jpg,jpeg,png',
-                'picture4' => 'required|image|mimes:jpg,jpeg,png',
+                'foto.*' => 'required|image|mimes:jpg,jpeg,png',
                 'description' => 'required|string',
             ]
         );
 
-        if ($request->hasFile('foto')) {
-            $fileNameWithExtension = $request->file('foto')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('foto')->getClientOriginalExtension();
-            $foto = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('foto')->storeAs('public/files/photos', $foto);
-        } else {
-            $foto = '';
-        }
         $galeri = new Galery();
         $galeri->judul = $request->input('judul');
         $galeri->kategori_galery_id = $request->input('kategori_galery_id');
+
+        $foto = '';
+        if ($request->hasFile('foto')) {
+            $fileNameWithExtension = $request->file('foto')[0]->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('foto')[0]->getClientOriginalExtension();
+            $foto = $fileName . '_' . time() . '.' . $extension;
+            $path = $request->file('foto')[0]->storeAs('public/files/photos', $foto);
+        }
+
         $galeri->foto = $foto;
         $galeri->description = $request->input('description');
-        // dd($galeri);
         $galeri->save();
 
-        if ($request->hasFile('picture')) {
-            $fileNameWithExtension = $request->file('picture')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture')->getClientOriginalExtension();
-            $picture = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture')->storeAs('public/files/photos', $picture);
-        } else {
-            $picture = 'noimage.jpg';
+        if ($request->hasFile('foto')) {
+            foreach ($request->file('foto') as $key => $value) {
+                $fileNameWithExtension = $value->getClientOriginalName();
+                $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+                $extension = $value->getClientOriginalExtension();
+                $picture = $fileName . '_' . time() . '.' . $extension;
+                $path = $value->storeAs('public/files/photos', $picture);
+
+                $pictures = new Gambar();
+                $pictures->picture = $picture;
+                $galeri->gambars()->save($pictures);
+            }
         }
-
-        if ($request->hasFile('picture2')) {
-            $fileNameWithExtension = $request->file('picture2')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture2')->getClientOriginalExtension();
-            $picture2 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture2')->storeAs('public/files/photos', $picture2);
-        } else {
-            $picture2 = 'noimage.jpg';
-        }
-
-
-        if ($request->hasFile('picture3')) {
-            $fileNameWithExtension = $request->file('picture3')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture3')->getClientOriginalExtension();
-            $picture3 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture3')->storeAs('public/files/photos', $picture3);
-        } else {
-            $picture3 = 'noimage.jpg';
-        }
-
-        if ($request->hasFile('picture4')) {
-            $fileNameWithExtension = $request->file('picture4')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture4')->getClientOriginalExtension();
-            $picture4 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture4')->storeAs('public/files/photos', $picture4);
-        } else {
-            $picture4 = 'noimage.jpg';
-        }
-
-        $pictures = new Gambar();
-        $pictures->picture = $picture;
-        $galeri->gambars()->save($pictures);
-
-        $pictureTwo = new Gambar();
-        $pictureTwo->picture = $picture2;
-        $galeri->gambars()->save($pictureTwo);
-
-        $pictureTree = new Gambar();
-        $pictureTree->picture = $picture3;
-        $galeri->gambars()->save($pictureTree);
-
-        $pictureFour = new Gambar();
-        $pictureFour->picture = $picture4;
-        $galeri->gambars()->save($pictureFour);
 
         Session::put('message', 'Data berhasil ditambah');
         return redirect(route('index-galeri-admin'));

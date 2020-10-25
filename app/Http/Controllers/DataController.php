@@ -56,7 +56,6 @@ class DataController extends Controller
         $this->validate($request, 
             [
                 'judul' => 'required|unique:data,judul|max:255',
-                'isi' => 'required|max:320',
                 'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
                 'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
                 'abstraksi' => 'required',
@@ -90,7 +89,7 @@ class DataController extends Controller
 
         $data = new Data();
         $data->judul = $request->input('judul');
-        $data->isi = $request->input('isi');
+        $data->isi = '';
         $data->file = $files;
         $data->size_files = $sizeFile;
         $data->abstraksi = $request->input('abstraksi');
@@ -137,7 +136,6 @@ class DataController extends Controller
         $this->validate($request, 
             [
                 'judul' => 'required|unique:data,judul|max:255',
-                'isi' => 'required|max:320',
                 'file' => 'required|mimes:pdf,jpg,jpeg,doc,docx,pptx,xlsx,cls,xls,zip',
                 'ketenagakerjaan_id' => 'required|exists:ketenagakerjaans,id',
                 'abstraksi' => 'required',
@@ -146,7 +144,6 @@ class DataController extends Controller
 
         $data =  Data::find($id);
         $data->judul = $request->input('judul');
-        $data->isi = $request->input('isi');
         if ($request->hasFile('file')) {
             $fileNameWithExtension = $request->file('file')->getClientOriginalName();
             $sizeFile = $request->file('file')->getSize();

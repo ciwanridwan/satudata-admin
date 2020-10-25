@@ -52,7 +52,7 @@ Data
                                     @forelse ($data as $item)
                                     <td>{{$nomor}}</td>
                                     <td>{{$item->judul}}</td>
-                                    <td>{{$item->isi}}</td>
+                                    <td>{{$item->abstraksi}}</td>
                                     <td>{{$item->file}}</td>
                                     @foreach ($tenagakerja as $tg)
                                     @if ($tg->id == $item->ketenagakerjaan_id)

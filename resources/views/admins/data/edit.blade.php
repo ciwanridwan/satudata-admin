@@ -36,12 +36,6 @@ Edit Data
                                     <p class="text-danger">{{ $errors->first('judul') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="isi">Isi</label>
-                                    <input type="text" class="form-control" id="isi" name="isi" value="{{$edit->isi}}"
-                                        placeholder=".........." maxlength="42">
-                                    <p class="text-danger">{{ $errors->first('isi') }}</p>
-                                </div>
-                                <div class="form-group">
                                     <label for="file">File</label>
                                     <input type="file" class="form-control form-control-lg" id="file" name="file" value="{{$edit->file}}"
                                         placeholder="..........">

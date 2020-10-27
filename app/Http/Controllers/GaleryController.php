@@ -107,9 +107,10 @@ class GaleryController extends Controller
      */
     public function edit($judul)
     {
-        $edit = Galery::where('judul', $judul)->first();
-        $kategoriGaleri = KategoriGalery::all();
-        return view('admins.galery.edit')->with('edit', $edit)->with('kategoriGaleri', $kategoriGaleri);
+        $data['edit'] = Galery::where('judul', $judul)->first();
+        $data['images'] = Gambar::where('galery_id', $data['edit']->id)->get();
+        $data['kategoriGaleri'] = KategoriGalery::all();
+        return view('admins.galery.edit')->with($data);
     }
 
     /**
@@ -126,98 +127,31 @@ class GaleryController extends Controller
             [
                 'judul' => 'required|unique:galeries,judul|max:255',
                 'kategori_galery_id' => 'required|exists:kategori_galeries,id',
-                'foto' => 'image|mimes:jpg,jpeg,png',
+                'foto.*' => 'mimes:jpg,jpeg,png',
                 'judul' => 'required|string',
                 'description' => 'required|string',
-                'picture' => 'image|mimes:jpg,jpeg,png',
-                'picture2' => 'image|mimes:jpg,jpeg,png',
-                'picture3' => 'image|mimes:jpg,jpeg,png',
-                'picture4' => 'image|mimes:jpg,jpeg,png'
             ]
         );
 
         $galeri = Galery::find($id);
-        if ($request->hasFile('foto')) {
-            $fileNameWithExtension = $request->file('foto')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('foto')->getClientOriginalExtension();
-            $foto = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('foto')->storeAs('public/files/photos', $foto);
-            $galeri->foto = $foto;
-
-            $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
-
-            if ($select_old_gambar_name != 'noimage.jpg') {
-                Storage::delete('public/files/photos', $select_old_gambar_name->foto);
-            }
-        }
-
         $galeri->judul = $request->input('judul');
         $galeri->description = $request->input('description');
         $galeri->kategori_galery_id = $request->input('kategori_galery_id');
         $galeri->update();
 
-        $pictures = Gambar::where('galery_id', $galeri->id)->first();
-        // dd($pictures);
-        if ($request->hasFile('picture')) {
-            $fileNameWithExtension = $request->file('picture')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture')->getClientOriginalExtension();
-            $picture = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture')->storeAs('public/files/photos', $picture);
-            $pictures->picture = $picture;
-            $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
-            if ($select_old_gambar_name != 'noimage.jpg') {
-                Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
-            }
-        }
-        $galeri->gambars()->update(array());
+        if ($request->hasFile('foto')) {
+            foreach ($request->file('foto') as $key => $value) {
+                $fileNameWithExtension = $value->getClientOriginalName();
+                $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+                $extension = $value->getClientOriginalExtension();
+                $picture = $fileName . '_' . time() . '.' . $extension;
+                $path = $value->storeAs('public/files/photos', $picture);
 
-        $pictureTwo = Gambar::find('galery_id', $id);
-        if ($request->hasFile('picture2')) {
-            $fileNameWithExtension = $request->file('picture2')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture2')->getClientOriginalExtension();
-            $picture2 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture2')->storeAs('public/files/photos', $picture2);
-            $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
-            $pictureTwo->picture = $picture2;
-            if ($select_old_gambar_name != 'noimage.jpg') {
-                Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
+                $pictures = new Gambar();
+                $pictures->picture = $picture;
+                $galeri->gambars()->save($pictures);
             }
         }
-        $galeri->gambars()->update($pictureTwo);
-
-        $pictureTree = Gambar::find('galery_id', $id);
-        if ($request->hasFile('picture3')) {
-            $fileNameWithExtension = $request->file('picture3')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture3')->getClientOriginalExtension();
-            $picture3 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture3')->storeAs('public/files/photos', $picture3);
-            $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
-            $pictureTree->picture = $picture3;
-            if ($select_old_gambar_name != 'noimage.jpg') {
-                Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
-            }
-        }
-        $galeri->gambars()->update($pictureTree);
-        
-
-        $pictureFour = Gambar::find('galery_id', $id);
-        if ($request->hasFile('picture4')) {
-            $fileNameWithExtension = $request->file('picture4')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
-            $extension = $request->file('picture4')->getClientOriginalExtension();
-            $picture4 = $fileName . '_' . time() . '.' . $extension;
-            $path = $request->file('picture4')->storeAs('public/files/photos', $picture4);
-            $select_old_gambar_name = DB::table('galeries')->where('id', $request->id)->first();
-            $pictureFour->picture = $picture4;
-            if ($select_old_gambar_name != 'noimage.jpg') {
-                Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
-            }
-        }
-        $galeri->gambars()->update($pictureFour);
 
         Session::put('message', 'Data berhasil diperbaharui');
         return redirect(route('index-galeri-admin'));
@@ -237,5 +171,11 @@ class GaleryController extends Controller
 
         Session::put('message', 'Data berhasil dihapus');
         return redirect(route('index-galeri-admin'));
+    }
+
+    public function deleteImage($id)
+    {
+        Gambar::find($id)->delete();
+        return redirect()->back();
     }
 }

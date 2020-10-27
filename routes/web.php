@@ -92,6 +92,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/create', 'GaleryController@create')->name('create-galeri-admin');
         Route::get('/index', 'GaleryController@index')->name('index-galeri-admin');
         Route::get('/edit/{judul}', 'GaleryController@edit')->name('edit-galeri-admin');
+        Route::post('images/delete/{id}', 'GaleryController@deleteImage')->name('galeri.delete.image');
     });
 
 // KATEGORI INFOGRAPIK DAN GALERY

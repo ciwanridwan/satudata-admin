@@ -166,6 +166,7 @@ class GaleryController extends Controller
      */
     public function destroy($id)
     {
+        Gambar::where('galery_id', $id)->delete();
         $galeri = Galery::find($id);
         $galeri->delete();
 

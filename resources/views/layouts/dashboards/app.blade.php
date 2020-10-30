@@ -62,6 +62,7 @@
   <script type="text/javascript">
     CKEDITOR.replace('init-ckeditor');
   </script>
+  @yield('foot-content')
   <!-- End custom js for this page-->
   @yield('js-province')
   @yield('js-deskripsi')

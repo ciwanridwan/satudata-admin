@@ -47,7 +47,7 @@ Galeri
                                     <td>{{$k->nama}}</td>
                                     @endif
                                     @endforeach
-                                    <td><img src="{{asset('storage/photos/'. $item->foto)}}" alt=""></td>
+                                    <td><img src="{{asset('storage/files/photos/'. $item->foto)}}" alt=""></td>
                                     <td><a href="{{route('edit-galeri-admin', $item->judul)}}" class="btn btn-warning">Edit</a></td>
                                     <td>
                                         <form action="{{route('delete-galeri-admin', $item->id)}}" method="POST">

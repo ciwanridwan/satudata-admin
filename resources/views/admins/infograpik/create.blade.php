@@ -48,22 +48,9 @@ Input Infograpik
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="province_id">Provinsi</label>
-                                    <select class="form-control" id="province_id" name="province_id" required>
-                                        <option value="">Pilih Provinsi</option>
-                                        @foreach ($provinces as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <p class="text-danger">{{ $errors->first('province_id') }}</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="city_id">Pilih Kabupaten/Kota</label>
-                                    <select class="form-control" id="city_id" name="city_id" required>
-                                        <option value="">Pilih Kabupaten/Kota</option>
-                                    </select>
-                                    <p class="text-danger">{{ $errors->first('city_id') }}</p>
+                                    <label for="gambar">Thumbnail</label>
+                                    <input type="file" class="form-control form-control-lg" name="thumbnail" required>
+                                    <p class="text-danger">{{ $errors->first('thumbnail') }}</p>
                                 </div>
 
                                 <div class="form-group">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldAbstraksiToDataTable extends Migration
+class AddFieldThumbnailToInfoGrapikTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddFieldAbstraksiToDataTable extends Migration
      */
     public function up()
     {
-        Schema::table('data', function (Blueprint $table) {
-            $table->text('abstraksi')->nullable()->after('size_files');
+        Schema::table('info_grapiks', function (Blueprint $table) {
+            $table->text('thumbnail')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddFieldAbstraksiToDataTable extends Migration
      */
     public function down()
     {
-        Schema::table('data', function (Blueprint $table) {
-            //
+        Schema::table('info_grapiks', function (Blueprint $table) {
+            $table->text('thumbnail');
         });
     }
 }

@@ -50,36 +50,7 @@ Edit Infograpik
                                     </select>
                                     <p class="text-danger">{{ $errors->first('kategori_info_id') }}</p>
                                 </div>
-
-
-                                <div class="form-group">
-                                    <label for="province_id">Provinsi</label>
-                                    <select class="form-control" id="province_id" name="province_id">
-                                        @foreach ($provinces as $k)
-                                        @if ($edit->province_id == $k->id)
-                                        <option value="{{$k->id}}">{{$k->name}}</option>
-                                        @endif
-                                        @endforeach
-                                        @foreach ($provinces as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <p class="text-danger">{{ $errors->first('province_id') }}</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="city_id">Pilih Kabupaten/Kota</label>
-                                    <select class="form-control" id="city_id" name="city_id">
-                                        @foreach ($city as $k)
-                                        @if ($edit->city_id == $k->id)
-                                        <option value="{{$k->id}}">{{$k->name}}</option>
-                                        @endif
-                                        @endforeach
-                                        {{-- <option value="">Pilih Kabupaten/Kota</option> --}}
-                                    </select>
-                                    <p class="text-danger">{{ $errors->first('city_id') }}</p>
-                                </div>
-
+                                
                                 <div class="form-group">
                                     <label for="content">Konten</label>
                                     <textarea name="content" id="init-ckeditor" class="form-control">{{ $edit->content }}</textarea>

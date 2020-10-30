@@ -10,4 +10,9 @@ class Galery extends Model
     {
         return $this->hasMany(Gambar::class);
     }
+
+    public function kategoryGaleries()
+    {
+        return $this->belongsTo(KategoriGalery::class);
+    }
 }

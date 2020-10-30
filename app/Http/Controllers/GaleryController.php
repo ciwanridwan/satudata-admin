@@ -184,6 +184,9 @@ class GaleryController extends Controller
         );
 
         $galeri = Galery::find($id);
+        $galeri->judul = $request->input('judul');
+        $galeri->description = $request->input('description');
+        $galeri->kategori_galery_id = $request->input('kategori_galery_id');
         if ($request->hasFile('foto')) {
             $fileNameWithExtension = $request->file('foto')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
@@ -198,10 +201,6 @@ class GaleryController extends Controller
                 Storage::delete('public/photos', $select_old_gambar_name->foto);
             }
         }
-
-        $galeri->judul = $request->input('judul');
-        $galeri->description = $request->input('description');
-        $galeri->kategori_galery_id = $request->input('kategori_galery_id');
         $galeri->update();
 
         $pictures = Gambar::where('galery_id', $galeri->id)->first();
@@ -218,9 +217,10 @@ class GaleryController extends Controller
                 Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
             }
         }
-        $galeri->gambars()->update(array());
+        // dd($pictures);
+        $galeri->gambars()->update(array('picture'=> $picture));
 
-        $pictureTwo = Gambar::find('galery_id', $id);
+        $pictureTwo = Gambar::where('galery_id', $galeri->id)->first();
         if ($request->hasFile('picture2')) {
             $fileNameWithExtension = $request->file('picture2')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
@@ -233,9 +233,9 @@ class GaleryController extends Controller
                 Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
             }
         }
-        $galeri->gambars()->update($pictureTwo);
+        $galeri->gambars()->update(array('picture'=> $picture2));
 
-        $pictureTree = Gambar::find('galery_id', $id);
+        $pictureTree = Gambar::where('galery_id', $galeri->id)->first();
         if ($request->hasFile('picture3')) {
             $fileNameWithExtension = $request->file('picture3')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
@@ -248,10 +248,10 @@ class GaleryController extends Controller
                 Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
             }
         }
-        $galeri->gambars()->update($pictureTree);
+        $galeri->gambars()->update(array('picture'=> $picture3));
         
 
-        $pictureFour = Gambar::find('galery_id', $id);
+        $pictureFour = Gambar::where('galery_id', $galeri->id)->first();
         if ($request->hasFile('picture4')) {
             $fileNameWithExtension = $request->file('picture4')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
@@ -264,7 +264,7 @@ class GaleryController extends Controller
                 Storage::delete('public/infograpiks', $select_old_gambar_name->foto);
             }
         }
-        $galeri->gambars()->update($pictureFour);
+        $galeri->gambars()->update(array('picture'=> $picture4));
 
         Session::put('message', 'Data berhasil diperbaharui');
         return redirect(route('index-galeri-admin'));
@@ -280,6 +280,7 @@ class GaleryController extends Controller
     public function destroy($id)
     {
         $galeri = Galery::find($id);
+        $galeri->gambars()->delete();
         $galeri->delete();
 
         Session::put('message', 'Data berhasil dihapus');

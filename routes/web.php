@@ -15,17 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // API City
 Route::get('/api/city/', 'InfoGrapikController@getCity');
-
-
-// Route::group(['prefix' => 'user'], function (){
-//     Route::get('login', 'PublicUsersController@formLogin')->name('users-login');
-//     Route::get('register', 'PublicUsersController@formRegister')->name('users-register');
-// });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

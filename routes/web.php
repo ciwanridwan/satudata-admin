@@ -14,15 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
 // API City
 Route::get('/api/city/', 'InfoGrapikController@getCity');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 // Ketenagakerjaan
 Route::group(['middleware' => 'auth'], function (){

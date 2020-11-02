@@ -20,7 +20,7 @@
   <!-- Layout styles -->
   <link rel="stylesheet" href="{{asset('/src/assets/css/demo_1/style.css')}}">
   <!-- End Layout styles -->
-  <link rel="shortcut icon" href="{{ asset('/src/assets/images/logos.ico')}}" />
+  <link rel="shortcut icon" href="{{ asset('/src/assets/images/logo-data2.ico')}}" />
 </head>
 <body>
   <div class="container-scroller">

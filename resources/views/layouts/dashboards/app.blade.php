@@ -58,9 +58,59 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('/src/assets/js/demo_1/dashboard.js')}}"></script>
-  <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+  <!-- <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script> -->
+  <script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
   <script type="text/javascript">
-    CKEDITOR.replace('init-ckeditor');
+    // CKEDITOR.replace('init-ckeditor');
+    ClassicEditor
+    .create( document.querySelector( '#init-ckeditor' ), {
+
+      toolbar: {
+        items: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        'underline',
+        'link',
+        'bulletedList',
+        'numberedList',
+        'fontSize',
+        '|',
+        'indent',
+        'outdent',
+        'alignment',
+        '|',
+        'blockQuote',
+        'insertTable',
+        'mediaEmbed',
+        'undo',
+        'redo',
+        'horizontalLine'
+        ]
+      },
+      language: 'id',
+      table: {
+        contentToolbar: [
+        'tableColumn',
+        'tableRow',
+        'mergeTableCells',
+        'tableCellProperties',
+        'tableProperties'
+        ]
+      },
+      licenseKey: '',
+
+    } )
+    .then( editor => {
+      window.editor = editor;
+    } )
+    .catch( error => {
+      console.error( 'Oops, something went wrong!' );
+      console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+      console.warn( 'Build id: ytelpisvsc0n-fpyjqvajdlqp' );
+      console.error( error );
+    } );
   </script>
   @yield('foot-content')
   <!-- End custom js for this page-->

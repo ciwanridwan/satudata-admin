@@ -11,6 +11,7 @@
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="{{ asset('assets/style/main.css')}}" rel="stylesheet" />
+    <link rel="shortcut icon" href="{{ asset('/assets/images/logo-data2.ico')}}" />
 </head>
 
 <body>
@@ -19,7 +20,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <img src="{{ asset('assets/logo.png')}}" alt="" />
+                    <img src="{{ asset('assets/src/images/logo-data2.png')}}" alt="" />
                 </div>
             </div>
         </div>

@@ -76,7 +76,7 @@ Edit Galeri
 
                                 <div class="form-group">
                                     <label for="description">Deskripsi</label>
-                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{$edit->description}}</textarea>
+                                    <textarea name="description" id="init-ckeditor" cols="30" rows="10" class="form-control">{{$edit->description}}</textarea>
                                     <p class="text-danger">{{ $errors->first('description') }}</p>
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>

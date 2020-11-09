@@ -54,7 +54,7 @@ Edit Data
 
                                 <div class="form-group">
                                     <label for="abstraksi">Abstraksi</label>
-                                    <textarea name="abstraksi" id="description" class="form-control">{{ old('description') }}</textarea>
+                                    <textarea name="abstraksi" id="init-ckeditor" class="form-control">{{ old('description') }}</textarea>
                                     <p class="text-danger">{{ $errors->first('abstraksi') }}</p>
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>

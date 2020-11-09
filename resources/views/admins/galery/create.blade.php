@@ -54,7 +54,7 @@ Tambah Galeri
 
                                 <div class="form-group">
                                     <label for="description">Deskripsi</label>
-                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
+                                    <textarea name="description" id="init-ckeditor" cols="30" rows="10" class="form-control" required></textarea>
                                     <p class="text-danger">{{ $errors->first('description') }}</p>
                                 </div>
                                 

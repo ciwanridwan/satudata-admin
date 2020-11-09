@@ -31,7 +31,7 @@
     <li class="nav-item">
       <a class="nav-link" href="{{route('index-infograpik-admin')}}">
         <i class="menu-icon typcn typcn-document-text"></i>
-        <span class="menu-title">Infograpik</span>
+        <span class="menu-title">Infografik</span>
       </a>
     </li>
     <li class="nav-item">
@@ -55,7 +55,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item">
-            <a class="nav-link" href="{{route('index-kategori-infograpik')}}">Infograpik</a>
+            <a class="nav-link" href="{{route('index-kategori-infograpik')}}">Infografik</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('index-kategori-galery')}}">Galery</a>

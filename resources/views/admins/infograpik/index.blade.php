@@ -1,7 +1,7 @@
 @extends('layouts.dashboards.app')
 
 @section('title')
-Infograpik
+Infografik
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@ Infograpik
                         {{Session::put('message', null)}}
                     </div>
                     @endif
-                    <h4 class="card-title">Infograpik</h4>
+                    <h4 class="card-title">Infografik</h4>
                     <a href="{{route('create-infograpik-admin')}}" class="btn btn-primary">Tambah</a>
                     <div class="table-responsive">
                         <table class="table table-striped">

@@ -1,7 +1,7 @@
 @extends('layouts.dashboards.app')
 
 @section('title')
-Edit Infograpik
+Edit Infografik
 @endsection
 
 
@@ -25,7 +25,7 @@ Edit Infograpik
                             </div>
                             {{Session::put('message', null)}}
                             @endif
-                            <h4 class="card-title">Edit Infograpik</h4>
+                            <h4 class="card-title">Edit Infografik</h4>
                             <form class="forms-sample" action="{{route('update-infograpik-admin', $edit->id)}}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf

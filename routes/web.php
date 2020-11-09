@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function (){
     });
 
 // Infograpis
-    Route::group(['prefix' => 'infograpik'], function (){
+    Route::group(['prefix' => 'infografik'], function (){
         Route::post('/update/{id}', 'InfoGrapikController@update')->name('update-infograpik-admin');
         Route::post('/store', 'InfoGrapikController@store')->name('store-infograpik-admin');
         Route::post('/delete/{id}', 'InfoGrapikController@destroy')->name('delete-infograpik-admin');

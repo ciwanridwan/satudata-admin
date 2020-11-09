@@ -1,7 +1,7 @@
 @extends('layouts.dashboards.app')
 
 @section('title')
-Input Infograpik
+Input Infografik
 @endsection
 
 
@@ -25,7 +25,7 @@ Input Infograpik
                             </div>
                             {{Session::put('message', null)}}
                             @endif
-                            <h4 class="card-title">Input Infograpik</h4>
+                            <h4 class="card-title">Input Infografik</h4>
                             <form id="formuploadimage" class="forms-sample" action="{{route('store-infograpik-admin')}}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf

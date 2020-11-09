@@ -1,7 +1,7 @@
 @extends('layouts.dashboards.app')
 
 @section('title')
-Edit Kategori Infograpik
+Edit Kategori Infografik
 @endsection
 
 
@@ -14,7 +14,7 @@ Edit Kategori Infograpik
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Edit Kategori Infograpik</h4>
+                            <h4 class="card-title">Edit Kategori Infografik</h4>
                             <form class="forms-sample" action="{{route('update-kategori-infograpik', $key->id)}}" method="POST">
                                 @csrf
                                 @method('POST')

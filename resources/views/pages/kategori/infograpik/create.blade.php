@@ -1,7 +1,7 @@
 @extends('layouts.dashboards.app')
 
 @section('title')
-Kategori Infograpik
+Kategori Infografik
 @endsection
 
 
@@ -14,7 +14,7 @@ Kategori Infograpik
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Input Kategori Infograpik</h4>
+                            <h4 class="card-title">Input Kategori Infografik</h4>
                             <form class="forms-sample" action="{{route('store-kategori-infograpik')}}" method="POST">
                                 @csrf
                                 @method('POST')

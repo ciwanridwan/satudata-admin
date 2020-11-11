@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -22,6 +23,7 @@
   <!-- End Layout styles -->
   <link rel="shortcut icon" href="{{ asset('/src/assets/images/logo-data2.ico')}}" />
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -60,6 +62,7 @@
   <script src="{{ asset('/src/assets/js/demo_1/dashboard.js')}}"></script>
   <!-- <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script> -->
   <script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
+  <script src="{{ asset('/src/assets/js/shared/chart.js')}}"></script>
   <script type="text/javascript">
     // CKEDITOR.replace('init-ckeditor');
     ClassicEditor
@@ -116,5 +119,22 @@
   <!-- End custom js for this page-->
   @yield('js-province')
   @yield('js-deskripsi')
+
+  {{-- Google Analytics --}}
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    
+    // Replace the following lines with the plugins you want to use.
+    ga('require', 'eventTracker');
+    ga('require', 'outboundLinkTracker');
+    ga('require', 'urlChangeTracker');
+    // ...
+    
+    ga('send', 'pageview');
+  </script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+  <script async src="{{ asset('/js/autotrack/autotrack.js')}}"></script>
 </body>
+
 </html>

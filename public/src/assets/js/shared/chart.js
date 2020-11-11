@@ -307,7 +307,7 @@ $(function () {
       data: {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
-          label: 'Profit',
+          // label: 'Profit',
           data: [15, 28, 14, 22, 38, 30, 40, 70, 85, 50, 23, 20],
           backgroundColor: ChartColor[0],
           borderColor: ChartColor[0],
@@ -330,7 +330,7 @@ $(function () {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Sales by year',
+              labelString: 'Downloader Data',
               fontSize: 12,
               lineHeight: 2
             },
@@ -355,7 +355,7 @@ $(function () {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'revenue by sales',
+              labelString: 'Jumlah Download',
               fontSize: 12,
               lineHeight: 2
             },
@@ -439,7 +439,7 @@ $(function () {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'User by time',
+              labelString: 'Bulan',
               fontSize: 12,
               lineHeight: 2
             },
@@ -464,7 +464,7 @@ $(function () {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Number of users',
+              labelString: 'Jumlah Pengunjung',
               fontSize: 12,
               lineHeight: 2
             },

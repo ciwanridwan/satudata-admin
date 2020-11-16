@@ -10,7 +10,7 @@ Dashboard
     <div class="col-lg-6 grid-margin stretch-card">
       <div class="card">
         <div class="p-4 border-bottom bg-light">
-          {{-- <h4 class="card-title mb-0">Pengunjung Website</h4> --}}
+          <h4 class="card-title mb-0">Pengunjung Website</h4>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center pb-4">
@@ -25,7 +25,7 @@ Dashboard
     <div class="col-lg-6 grid-margin stretch-card">
       <div class="card">
         <div class="p-4 border-bottom bg-light">
-          {{-- <h4 class="card-title mb-0">Bar Chart</h4> --}}
+          <h4 class="card-title mb-0">Bar Chart</h4>
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center pb-4">

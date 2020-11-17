@@ -130,6 +130,7 @@
   <!-- End custom js for this page-->
   @yield('js-province')
   @yield('js-deskripsi')
+  @yield('chart-visitor')
 
 
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>

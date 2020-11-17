@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Spatie\Analytics\Period;
 use Analytics;
 use App\Visitor;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,6 +27,26 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    // Grapik Chart Visitor 
+    public function visitor()
+    {
+        $date = Carbon::now();
+        $cut = explode('-', $date);
+        $year = $cut[0];
+        $visitor = Visitor::select(DB::raw("count(ip) as visitor_count"), DB::raw('month(created_at) as month'))
+            ->orderBy("created_at")
+            ->groupBy(DB::raw("month(created_at)"))
+            ->whereYear('created_at', $year)
+            ->pluck('visitor_count', 'month');
+        // $visitor = array_column($visitor, 'visitor_count');
+        return $visitor;
+    }
+
+    // User Downloader
+    public function userDownloader()
+    {
+    }
+
     public function ipUser()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -149,22 +172,22 @@ class HomeController extends Controller
         $browser = $this->browserUser();
         $os      = $this->osUser();
 
-        // untuk tes hilangkan comment dibawah ini
+        // cookie
         unset($_COOKIE['VISITOR']);
         if (!isset($_COOKIE['VISITOR'])) {
 
-            // Masa akan direkam kembali
-            // Tujuan untuk menghindari merekam pengunjung yang sama dihari yang sama.
+            // will record
+            // merekam pengunjung yang sama dihari yang sama.
             // Cookie akan disimpan selama 24 jam
             $duration = time() + 60 * 60 * 24;
 
-            // simpan kedalam cookie browser
+            // save kedalam cookie browser
             setcookie('VISITOR', $browser, $duration);
 
             // current time
             // $dateTime = date('Y-m-d H:i:s');
 
-            // SQL Command atau perintah SQL INSERT
+            // Query
             $visitor = Visitor::create(
                 [
                     'ip' => $ip,
@@ -172,10 +195,9 @@ class HomeController extends Controller
                     'browser' => $browser,
                 ]
             );
-
-            // variabel { $db } adalah perwakilan dari koneksi database lihat config.php
-            // $query = $db->query($sql);
         }
-        return view('dashboard', compact('ip', 'browser', 'os', 'visitor'));
+        $visitorCount = $this->visitor();
+        // dd($visitorCount);
+        return view('dashboard')->with('os', $os)->with('ip', $ip)->with('browser', $browser)->with('visitorCount', json_encode($visitorCount, JSON_NUMERIC_CHECK));
     }
 }

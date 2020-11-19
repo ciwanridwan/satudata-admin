@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Spatie\Analytics\Period;
 use Analytics;
+use App\Data;
+use App\Publikasi;
 use App\Visitor;
 use Carbon\Carbon;
 use DateTime;
@@ -37,14 +39,36 @@ class HomeController extends Controller
             ->orderBy("created_at")
             ->groupBy(DB::raw("month(created_at)"))
             ->whereYear('created_at', $year)
-            ->pluck('visitor_count', 'month');
-        // $visitor = array_column($visitor, 'visitor_count');
+            ->pluck('visitor_count', 'month')->toArray();
         return $visitor;
     }
 
-    // User Downloader
-    public function userDownloader()
+    // Data Downloader
+    public function dataDownloader()
     {
+        $date = Carbon::now();
+        $cut = explode('-', $date);
+        $year = $cut[0];
+        $dataDownloader = Data::select(DB::raw("SUM(total_download) as totalDownload"), DB::raw('month(created_at) as month'))
+            ->orderBy("created_at")
+            ->groupBy(DB::raw("month(created_at)"))
+            ->whereYear('created_at', $year)
+            ->pluck('totalDownload', 'month')->toArray();
+        return $dataDownloader;
+    }
+
+    // Publikasi Downloader
+    public function publikasiDownloader()
+    {
+        $date = Carbon::now();
+        $cut = explode('-', $date);
+        $year = $cut[0];
+        $publikasiDownloader = Publikasi::select(DB::raw("SUM(total_download) as totalDownload"), DB::raw('month(created_at) as month'))
+            ->orderBy("created_at")
+            ->groupBy(DB::raw("month(created_at)"))
+            ->whereYear('created_at', $year)
+            ->pluck('totalDownload', 'month')->toArray();
+        return $publikasiDownloader; 
     }
 
     public function ipUser()
@@ -187,17 +211,41 @@ class HomeController extends Controller
             // current time
             // $dateTime = date('Y-m-d H:i:s');
 
-            // Query
-            $visitor = Visitor::create(
-                [
-                    'ip' => $ip,
-                    'os' => $os,
-                    'browser' => $browser,
-                ]
-            );
         }
+        // Visitor Counter
         $visitorCount = $this->visitor();
-        // dd($visitorCount);
-        return view('dashboard')->with('os', $os)->with('ip', $ip)->with('browser', $browser)->with('visitorCount', json_encode($visitorCount, JSON_NUMERIC_CHECK));
+        $visitors = [];
+        for ($i = 0; $i < 12; $i++) {
+            if (!empty($visitorCount[$i + 1])) {
+                $visitors[$i] = $visitorCount[$i + 1];
+            } else {
+                $visitors[$i] = 0;
+            }
+        }
+        // Total Download Data
+        $totalDataDownload = $this->dataDownloader();
+        $dataDownloaders = [];
+        for ($i = 0; $i < 12; $i++) {
+            if (!empty($totalDataDownload[$i + 1])) {
+                $dataDownloaders[$i] = $totalDataDownload[$i + 1];
+            } else {
+                $dataDownloaders[$i] = 0;
+            }
+        }
+        // Total Download Publikasi
+        $totalDownloadPublikasi = $this->publikasiDownloader();
+        $publikasiDownloaders = [];
+        for ($i = 0; $i < 12; $i++) {
+            if (!empty($totalDownloadPublikasi[$i + 1])) {
+                $publikasiDownloaders[$i] = $totalDownloadPublikasi[$i + 1];
+            } else {
+                $publikasiDownloaders[$i] = 0;
+            }
+        }
+
+        // Total Download Publikasi
+
+        // dd($publikasiDownloaders);
+        return view('dashboard')->with('os', $os)->with('ip', $ip)->with('browser', $browser)->with('visitors', json_encode($visitors))->with('dataDownloaders', json_encode($dataDownloaders))->with('publikasiDownloaders', json_encode($publikasiDownloaders));
     }
 }

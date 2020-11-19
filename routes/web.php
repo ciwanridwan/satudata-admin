@@ -20,6 +20,7 @@ Route::get('/api/city/', 'InfoGrapikController@getCity');
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test','HomeController@visitor');
 
 // Ketenagakerjaan
 Route::group(['middleware' => 'auth'], function (){

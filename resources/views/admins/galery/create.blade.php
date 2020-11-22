@@ -70,7 +70,7 @@ Tambah Galeri
 </div>
 @endsection
 
-@section('js-province')
+@push('js-province')
     <script>
         $('#province_id').on('change', function() {
             $.ajax({
@@ -88,7 +88,7 @@ Tambah Galeri
             });
         })
     </script>
-@endsection
+@endpush
 
 @push('js-deskripsi')
 <script type="text/javascript">

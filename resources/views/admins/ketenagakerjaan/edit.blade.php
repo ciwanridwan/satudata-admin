@@ -55,5 +55,4 @@ Edit Ketenagakerjaan
         </div>
     </div>
 </div>
-
 @endsection

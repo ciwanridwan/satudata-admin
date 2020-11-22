@@ -54,5 +54,4 @@ Ketenagakerjaan
         </div>
     </div>
 </div>
-
 @endsection

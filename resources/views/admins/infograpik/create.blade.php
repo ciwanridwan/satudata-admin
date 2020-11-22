@@ -78,7 +78,7 @@ Input Infografik
 </div>
 @endsection
 
-@section('js-province')
+@push('js-province')
 <script>
     $('#province_id').on('change', function() {
             $.ajax({
@@ -96,8 +96,4 @@ Input Infografik
             });
         })
 </script>
-
-<script>
-
-</script>
-@endsection
+@endpush

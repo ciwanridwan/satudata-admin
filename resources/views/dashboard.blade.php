@@ -42,8 +42,8 @@ Dashboard
 </div>
 @endsection
 
-@section('chart-total-downloader')
-<script>
+@push('chart-total-downloader')
+<script type="text/javascript">
   var dataDownloader = <?php echo $dataDownloaders; ?>;
   var publikasiDownloader = <?php echo $publikasiDownloaders; ?>;
   if ($("#barChart").length) {
@@ -112,7 +112,7 @@ Dashboard
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Jumlah Pengunjung',
+              labelString: 'Jumlah Pendownload Data',
               fontSize: 12,
               lineHeight: 2
             },
@@ -157,10 +157,10 @@ Dashboard
     document.getElementById('bar-traffic-legend').innerHTML = barChart.generateLegend();
   }
 </script>
-@endsection
+@endpush
 
-@section('chart-visitor')
-<script>
+@push('chart-visitor')
+<script type="text/javascript">
   var visitor = <?php echo $visitors; ?>;
   if ($("#stackedbarChart").length) {
     var stackedbarChartCanvas = $("#stackedbarChart").get(0).getContext("2d");
@@ -267,4 +267,4 @@ Dashboard
     document.getElementById('stacked-bar-traffic-legend').innerHTML = stackedbarChart.generateLegend();
   }
 </script>
-@endsection
+@endpush

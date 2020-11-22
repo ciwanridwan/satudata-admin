@@ -47,7 +47,7 @@ Tambah News Flash
 </div>
 @endsection
 
-@section('js-province')
+@push('js-province')
     <script>
         $('#province_id').on('change', function() {
             $.ajax({
@@ -65,4 +65,4 @@ Tambah News Flash
             });
         })
     </script>
-@endsection
+@endpush

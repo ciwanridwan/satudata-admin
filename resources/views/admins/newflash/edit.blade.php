@@ -46,7 +46,7 @@ Edit News Flash
 </div>
 @endsection
 
-@section('js-province')
+@push('js-province')
     <script>
         $('#province_id').on('change', function() {
             $.ajax({
@@ -64,4 +64,4 @@ Edit News Flash
             });
         })
     </script>
-@endsection
+@endpush

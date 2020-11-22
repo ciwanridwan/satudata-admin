@@ -243,8 +243,6 @@ class HomeController extends Controller
             }
         }
 
-        // Total Download Publikasi
-
         // dd($publikasiDownloaders);
         return view('dashboard')->with('os', $os)->with('ip', $ip)->with('browser', $browser)->with('visitors', json_encode($visitors))->with('dataDownloaders', json_encode($dataDownloaders))->with('publikasiDownloaders', json_encode($publikasiDownloaders));
     }

@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="google-signin-client_id" content="81235167858-k856p385ijsisqieor05i2fiforrfsnl.apps.googleusercontent.com">
+  {{-- <meta name="google-signin-client_id" content="81235167858-k856p385ijsisqieor05i2fiforrfsnl.apps.googleusercontent.com"> --}}
   <title>Satudata - @yield('title')</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{asset('/src/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css')}}">
@@ -27,15 +27,6 @@
 
 <body>
   <div class="container-scroller">
-
-    {{-- Dependencies of Google Analytics --}}
-    {{-- <header>
-      <div id="embed-api-auth-container"></div>
-      <div id="view-selector-container"></div>
-      <div id="view-name"></div>
-      <div id="active-users-container"></div>
-    </header> --}}
-    {{-- End Dependencies of Google Analytics --}}
 
     <!-- partial:partials/_navbar.html -->
     @include('layouts.dashboards.navbar.navbar')
@@ -74,7 +65,7 @@
   <!-- <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script> -->
   <script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
   <script src="{{ asset('/src/assets/js/shared/chart.js')}}"></script>
-  <script type="text/javascript">
+  {{-- <script type="text/javascript">
     // CKEDITOR.replace('init-ckeditor');
     ClassicEditor
     .create( document.querySelector( '#init-ckeditor' ), {
@@ -125,38 +116,13 @@
       console.warn( 'Build id: ytelpisvsc0n-fpyjqvajdlqp' );
       console.error( error );
     } );
-  </script>
-  @yield('foot-content')
+  </script> --}}
+  @stack('foot-content')
   <!-- End custom js for this page-->
-  @yield('js-province')
-  @yield('js-deskripsi')
-  @yield('chart-visitor')
-  @yield('chart-total-downloader')
-
-
-  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-  <script type="text/javascript" src="{{ asset('js/google-analytics/ga.js')}}"></script>\
-  <script src="{{ asset('js/google-analytics/view-selector2.js')}}"></script>
-  <script src="{{ asset('js/google-analytics/date-range-selector.js')}}"></script>
-  <script src="{{ asset('js/google-analytics/active-users.js')}}"></script> --}}
-
-  <!-- Google Analytics -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    
-    ga('create', 'UA-XXXXX-Y', 'auto');
-    ga('send', 'pageview');
-    </script>
-  <!-- End Google Analytics -->
-  
-
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-  <script async src="{{ asset('/js/autotrack/autotrack.js')}}"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  @stack('js-province')
+  @stack('js-deskripsi')
+  @stack('chart-total-downloader')
+  @stack('chart-visitor')
 </body>
 
 </html>

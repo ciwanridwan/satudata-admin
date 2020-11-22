@@ -113,7 +113,7 @@ Edit Galeri
 </div>
 @endsection
 
-@section('foot-content')
+@push('foot-content')
 <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
@@ -124,9 +124,9 @@ Edit Galeri
         modal.find('.modal-footer #delete-image').attr('action', url);
     })
 </script>
-@endsection
+@endpush
 
-@section('js-province')
+@push('js-province')
 <script>
     $('#province_id').on('change', function() {
         $.ajax({
@@ -144,11 +144,63 @@ Edit Galeri
         });
     })
 </script>
-@endsection
+@endpush
 
-@section('js-deskripsi')
-<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+@push('js-deskripsi')
+<script type="text/javascript">
+    // CKEDITOR.replace('init-ckeditor');
+    ClassicEditor
+    .create( document.querySelector( '#init-ckeditor' ), {
+
+      toolbar: {
+        items: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        'underline',
+        'link',
+        'bulletedList',
+        'numberedList',
+        'fontSize',
+        '|',
+        'indent',
+        'outdent',
+        'alignment',
+        '|',
+        'blockQuote',
+        'insertTable',
+        'mediaEmbed',
+        'undo',
+        'redo',
+        'horizontalLine'
+        ]
+      },
+      language: 'id',
+      table: {
+        contentToolbar: [
+        'tableColumn',
+        'tableRow',
+        'mergeTableCells',
+        'tableCellProperties',
+        'tableProperties'
+        ]
+      },
+      licenseKey: '',
+
+    } )
+    .then( editor => {
+      window.editor = editor;
+    } )
+    .catch( error => {
+      console.error( 'Oops, something went wrong!' );
+      console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+      console.warn( 'Build id: ytelpisvsc0n-fpyjqvajdlqp' );
+      console.error( error );
+    } );
+  </script>
+{{-- <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('description');
-</script>
-@endsection
+</script> --}}
+@endpush

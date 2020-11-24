@@ -44,14 +44,11 @@ Data
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                $nomor = 1;
-                                @endphp
                                 <tr>
                                     @forelse ($data as $item)
-                                    <td>{{$nomor}}</td>
-                                    <td>{{ \Str::limit($value->judul, 40) }}</td>
-                                    <td>{{ \Str::limit(strip_tags($value->abstraksi), 40) }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ \Str::limit($item->judul, 40) }}</td>
+                                    <td>{{ \Str::limit(strip_tags($item->abstraksi), 40) }}</td>
                                     <td>{{$item->file}}</td>
                                     @foreach ($tenagakerja as $tg)
                                     @if ($tg->id == $item->ketenagakerjaan_id)
@@ -70,9 +67,6 @@ Data
                                     </td>
                                     <!-- <td><a href="{{route('download-file-data', $item->file)}}" class="btn btn-info">Download</a></td> -->
                                 </tr>
-                                @php
-                                $nomor = $nomor + 1;
-                                @endphp
                                 @empty
                                 <tr>
                                     <td colspan="3">Tidak Ada Data</td>

@@ -22,11 +22,10 @@ Data
                         {{Session::put('message', null)}}
                     </div>
                     @endif
-                    <form class="ml-auto search-form d-none d-md-block col-md-4" action="" method="GET"
-                        action="{{route('index-data-admin')}}">
+                    <form class="ml-auto search-form d-none d-md-block col-md-4" action="" method="GET" action="{{route('index-data-admin')}}">
                         <div class="form-group">
                             <input type="search" class="form-control" placeholder="Cari Judul" name="q"
-                                value="{{ request()->q }}">
+                            value="{{ request()->q }}">
                         </div>
                         <button class="btn btn-dark btn-rounded btn-fw">Cari</button>
                     </form>
@@ -51,16 +50,17 @@ Data
                                 <tr>
                                     @forelse ($data as $item)
                                     <td>{{$nomor}}</td>
-                                    <td>{{$item->judul}}</td>
-                                    <td>{!!$item->abstraksi!!}</td>
+                                    <td>{{ \Str::limit($value->judul, 40) }}</td>
+                                    <td>{{ \Str::limit(strip_tags($value->abstraksi), 40) }}</td>
                                     <td>{{$item->file}}</td>
                                     @foreach ($tenagakerja as $tg)
                                     @if ($tg->id == $item->ketenagakerjaan_id)
                                     <td>{{$tg->nama}}</td>
                                     @endif
                                     @endforeach
-                                    <td><a href="{{route('edit-data-admin', $item->judul)}}"
-                                            class="btn btn-warning">Edit</a></td>
+                                    <td>
+                                        <a href="{{route('edit-data-admin', $item->judul)}}" class="btn btn-warning">Edit</a>
+                                    </td>
                                     <td>
                                         <form action="{{route('delete-data-admin', $item->id)}}" method="POST">
                                             @csrf
@@ -68,8 +68,7 @@ Data
                                             <button class="btn btn-danger">Hapus</button>
                                         </form>
                                     </td>
-                                    {{-- <td><a href="{{route('download-file-data', $item->file)}}"
-                                    class="btn btn-info">Download</a></td> --}}
+                                    <!-- <td><a href="{{route('download-file-data', $item->file)}}" class="btn btn-info">Download</a></td> -->
                                 </tr>
                                 @php
                                 $nomor = $nomor + 1;

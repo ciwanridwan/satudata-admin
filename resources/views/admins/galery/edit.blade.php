@@ -81,7 +81,7 @@ Edit Galeri
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">Submit</button>
                             </form>
-                            <button class="btn btn-light">Cancel</button>
+                            <button class="btn btn-info" onclick="goBack()">Cancel</button>
                         </div>
                     </div>
                 </div>

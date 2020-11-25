@@ -65,6 +65,11 @@
   <!-- <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script> -->
   <script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
   <script src="{{ asset('/src/assets/js/shared/chart.js')}}"></script>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
   {{-- <script type="text/javascript">
     // CKEDITOR.replace('init-ckeditor');
     ClassicEditor

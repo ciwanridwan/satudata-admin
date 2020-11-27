@@ -1920,7 +1920,8 @@ textarea.form-control {
   .btn.disabled, .btn:disabled {
     opacity: 0.65; }
   .btn:not(:disabled):not(.disabled) {
-    cursor: pointer; }
+    cursor: pointer;
+    margin: 10px; }
 
 a.btn.disabled,
 fieldset:disabled a.btn {

@@ -44,8 +44,8 @@
                                     <td>
                                         <img class="thumb-image" src="{{ url('storage/' . $value->thumbnail) }}" style="cursor: pointer;"" onclick="window.open('<?= url('storage/' . $value->thumbnail) ?>', '_blank');">
                                     </td>
-                                    <td>{{$value->judul}}</td>
-                                    <td>{{$value->isi}}</td>
+                                    <td>{{ \Str::limit($value->judul, 40) }}</td>
+                                    <td>{{ \Str::limit($value->isi, 40) }}</td>
                                     <td>{{$value->file}}</td>
                                     <td>{{$value->size_file}}</td>
                                     <td><a href="{{route('edit-publikasi-admin', $value->judul)}}"

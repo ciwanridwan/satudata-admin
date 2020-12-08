@@ -9,9 +9,6 @@ Dashboard
   <div class="row">
     <div class="col-lg-6 grid-margin stretch-card">
       <div class="card">
-        {{-- <div class="p-4 border-bottom bg-light">
-          <h4 class="card-title mb-0">Pengunjung Website</h4>
-        </div> --}}
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center pb-4">
             <h4 class="card-title mb-0">Pengunjung Website</h4>
@@ -24,9 +21,6 @@ Dashboard
     </div>
     <div class="col-lg-6 grid-margin stretch-card">
       <div class="card">
-        {{-- <div class="p-4 border-bottom bg-light">
-          <h4 class="card-title mb-0">Bar Chart</h4>
-        </div> --}}
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center pb-4">
             <h4 class="card-title mb-0">Data Downloader</h4>
@@ -37,7 +31,50 @@ Dashboard
         </div>
       </div>
     </div>
-
+  </div>
+  <div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center pb-2">
+                <div class="dot-indicator bg-danger mr-2"></div>
+                <h5 class="mb-0">Total Pengunjung Website</h5>
+              </div>
+              <h4 class="font-weight-semibold">{{$totallyVisitor}}</h4>
+              <div class="progress progress-md">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="d-flex align-items-center pb-2">
+                <div class="dot-indicator bg-info mr-2"></div>
+                <h5 class="mb-0">Total Download Data</h5>
+              </div>
+              <h4 class="font-weight-semibold">{{$totallyData}}</h4>
+              <div class="progress progress-md">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <br>
+            <div class="col-md-6 mt-4 mt-md-0">
+              <div class="d-flex align-items-center pb-2">
+                <div class="dot-indicator bg-success mr-2"></div>
+                <h5 class="mb-0">Total Download Publikasi</h5>
+              </div>
+              <h4 class="font-weight-semibold">{{$totallyPublication}}</h4>
+              <div class="progress progress-md">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 @endsection
@@ -76,7 +113,7 @@ Dashboard
         stacked: true,
         layout: {
           padding: {
-            left: 0,
+            left: 0 ,
             right: 0,
             top: 0,
             bottom: 0
@@ -96,7 +133,7 @@ Dashboard
               stepSize: 50,
               min: 0,
               max: 150,
-              autoSkip: true,
+              autoSkip: false,
               autoSkipPadding: 15,
               maxRotation: 0,
               maxTicksLimit: 10
@@ -121,7 +158,7 @@ Dashboard
               stepSize: 50,
               min: 0,
               max: 300,
-              autoSkip: true,
+              autoSkip: false,
               autoSkipPadding: 15,
               maxRotation: 0,
               maxTicksLimit: 10
@@ -171,8 +208,8 @@ Dashboard
         datasets: [
           {
             label: "User",
-            backgroundColor: ChartColor[1],
-            borderColor: ChartColor[1],
+            backgroundColor: ChartColor[2],
+            borderColor: ChartColor[2],
             borderWidth: 1,
             data: visitor
           }
@@ -206,7 +243,7 @@ Dashboard
               stepSize: 50,
               min: 0,
               max: 150,
-              autoSkip: true,
+              autoSkip: false,
               autoSkipPadding: 15,
               maxRotation: 0,
               maxTicksLimit: 10
@@ -231,7 +268,7 @@ Dashboard
               stepSize: 50,
               min: 0,
               max: 300,
-              autoSkip: true,
+              autoSkip: false,
               autoSkipPadding: 15,
               maxRotation: 0,
               maxTicksLimit: 10

@@ -29,6 +29,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function totalDownloadPublikasi()
+    {
+        $total = Publikasi::sum('total_download');
+        return $total;
+    }
+
+    public function totalVisitor()
+    {
+        $total = Visitor::count();
+        return $total;
+    }
+
+    public function totalDownloadData()
+    {
+        // $total = Data::select(DB::raw("SUM(total_download) as total"))->first();
+        $total = Data::sum('total_download');
+        return $total;
+    }
+
     // Grapik Chart Visitor 
     public function visitor()
     {
@@ -243,7 +262,13 @@ class HomeController extends Controller
             }
         }
 
-        // dd($publikasiDownloaders);
-        return view('dashboard')->with('os', $os)->with('ip', $ip)->with('browser', $browser)->with('visitors', json_encode($visitors))->with('dataDownloaders', json_encode($dataDownloaders))->with('publikasiDownloaders', json_encode($publikasiDownloaders));
+        $totallyData = $this->totalDownloadData();
+        
+        $totallyPublication = $this->totalDownloadPublikasi();
+
+        $totallyVisitor = $this->totalVisitor();
+        // dd($totallyVisitor);
+        
+        return view('dashboard')->with('os', $os)->with('ip', $ip)->with('browser', $browser)->with('totallyPublication', $totallyPublication)->with('totallyVisitor', $totallyVisitor)->with('totallyData', $totallyData)->with('visitors', json_encode($visitors))->with('dataDownloaders', json_encode($dataDownloaders))->with('publikasiDownloaders', json_encode($publikasiDownloaders));
     }
 }

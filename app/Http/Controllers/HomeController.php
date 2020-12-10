@@ -29,6 +29,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function exportExcell()
+    {
+        return app('App\Http\Controllers\ExcellController')->export();
+    }
+
     public function totalDownloadPublikasi()
     {
         $total = Publikasi::sum('total_download');
@@ -227,9 +232,6 @@ class HomeController extends Controller
             // save kedalam cookie browser
             setcookie('VISITOR', $browser, $duration);
 
-            // current time
-            // $dateTime = date('Y-m-d H:i:s');
-
         }
         // Visitor Counter
         $visitorCount = $this->visitor();
@@ -267,8 +269,9 @@ class HomeController extends Controller
         $totallyPublication = $this->totalDownloadPublikasi();
 
         $totallyVisitor = $this->totalVisitor();
-        // dd($totallyVisitor);
-        
+
+        // $export = $this->exportExcell();
+        // dd($export);
         return view('dashboard')->with('os', $os)->with('ip', $ip)->with('browser', $browser)->with('totallyPublication', $totallyPublication)->with('totallyVisitor', $totallyVisitor)->with('totallyData', $totallyData)->with('visitors', json_encode($visitors))->with('dataDownloaders', json_encode($dataDownloaders))->with('publikasiDownloaders', json_encode($publikasiDownloaders));
     }
 }

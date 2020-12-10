@@ -47,6 +47,9 @@ Dashboard
                 <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100"
                   aria-valuemin="0" aria-valuemax="100"></div>
               </div>
+              <div class="d-flex align-items-center pb-2">
+                <a href="{{route('export-excel-visitor')}}" class="btn btn-danger">Download</a>
+              </div>
             </div>
             <div class="col-md-6 mt-4 mt-md-0">
               <div class="d-flex align-items-center pb-2">
@@ -57,6 +60,9 @@ Dashboard
               <div class="progress progress-md">
                 <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100"
                   aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="d-flex align-items-center pb-2">
+                <a href="{{route('export-excel-data')}}" class="btn btn-info">Download</a>
               </div>
             </div>
             <br>
@@ -69,6 +75,9 @@ Dashboard
               <div class="progress progress-md">
                 <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100"
                   aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="d-flex align-items-center pb-2">
+                <a href="{{route('export-excel-publikasi')}}" class="btn btn-success">Download</a>
               </div>
             </div>
           </div>

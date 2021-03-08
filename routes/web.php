@@ -18,7 +18,6 @@ Route::get('/export/excel/visitor', 'ExcellController@exportVisitor')->name('exp
 Route::get('/export/excel/data', 'ExcellController@exportData')->name('export-excel-data');
 Route::get('/export/excel/publikasi', 'ExcellController@exportPublikasi')->name('export-excel-publikasi');
 
-
 // API City
 Route::get('/api/city/', 'InfoGrapikController@getCity');
 

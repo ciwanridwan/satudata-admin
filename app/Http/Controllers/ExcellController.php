@@ -15,21 +15,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExcellController extends Controller
 {
-    // public function exportVisitor()
-    // { 
-    //     return Excel::download(new VisitorExport, 'Total Pengunjung Website Satudata.xlsx');
-    // }
-
-    // public function exportData()
-    // {
-    //     return Excel::download(new DataExport, 'Total Data Didownload.xlsx');
-    // }
-
-    // public function exportPublikasi()
-    // {
-    //     return Excel::download(new PublikasiExport, 'Total Publikasi Di Download.xlsx');
-    // }
-
     public function exportVisitor()
     {
         function visitorGenerator() {

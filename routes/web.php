@@ -108,6 +108,17 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('infograpik/delete/{id}', 'Kategori\InfoGrapikController@destroy')->name('delete-kategori-infograpik');
     });
 
+    // Banner 
+    Route::group(['prefix' => 'banner'], function () {
+        Route::get('/index', 'BannerController@index')->name('index-banner-admin');
+        Route::get('/create', 'BannerController@create')->name('create-banner-admin');
+        Route::get('/edit/{gambar}', 'BannerController@edit')->name('edit-banner-admin');
+        Route::post('/update/{id}', 'BannerController@update')->name('update-banner-admin');
+        Route::post('/store', 'BannerController@store')->name('store-banner-admin');
+        Route::post('/delete/{id}', 'BannerController@destroy')->name('delete-banner-admin');
+        Route::post('images/delete/{id}', 'BannerController@deleteImage')->name('banner.delete.image'); 
+    });
+
     // Route::get('1nf0-' . date('Ym'), function() {
     //     phpinfo();
     // });
